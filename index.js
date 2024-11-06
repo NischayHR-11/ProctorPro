@@ -29,6 +29,16 @@ app.post("/test",(req,res)=>{
     res.render("./createTest.ejs");
 });
 
+app.get("/addquestions",(req,res)=>{
+
+    res.render("./addquestion.ejs");
+});
+
+app.get("/description",(req,res)=>{
+
+    res.render("./description.ejs")
+})
+
 app.all("*",(req,res,next)=>{
 
     next(new Expresserror(404,"Page Not Found !!"));
