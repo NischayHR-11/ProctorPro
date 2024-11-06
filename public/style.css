@@ -1,0 +1,150 @@
+body{
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+
+    flex: 1;
+}
+
+.navbar-toggler{
+
+    text-decoration: none !important;
+    border: 0rem !important;
+    height: 2.5rem !important;
+}
+
+.navbar-toggler:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.footer{
+
+    margin-top: 1.5rem;
+    flex-direction: column;
+    display: flex;
+    width :100%;
+    align-items: center;
+    justify-content: center;
+    background-color:#EBEBEB;
+}
+
+.f-social i {
+
+    font-size: 1.5rem;
+}
+
+.f-links {
+
+    margin-bottom: 1.5rem;
+}
+
+.f-social a , .f-links a {
+
+    text-decoration: none;
+    color: black;
+    margin-right: 1.5rem;
+}
+
+.f-links, .f-brand{
+
+    font-size: 1.2rem;
+}
+
+.f-social a,.f-links a:hover {
+
+    text-decoration: underline;
+}
+
+.f-links ,.f-social, .f-brand{
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.2rem;
+    color: black;
+}
+
+
+.card{
+
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+
+    border-radius: 1rem !important;
+    height: 20rem;
+    width :100% !important;
+    object-fit: cover;
+}
+
+.card-img-overlay{
+
+    opacity: 0;
+}
+
+.card-img-overlay:hover{
+
+    opacity: 1;
+    background-color: rgb(255, 255, 255,.15);
+}
+
+.heart-icon{
+    
+    opacity: 1;
+}
+
+.row a {
+
+    text-decoration: none;
+}
+
+.row-i{
+
+    display: flex;
+}
+
+.row-i button {
+
+    margin-right: 1.5rem;
+}
+
+#map 
+{ 
+    
+    height: 40vh;
+    width: 100%;
+    /* width: 10vh; */
+}
+
+.choice{
+
+    background-color: transparent;
+    height: 40vh;
+    border-radius: 1rem;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.subchoice {
+
+    height: 15vh;
+    border-radius: 1rem;
+    background-color: #EBEBEB;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-direction: column; */
+    text-decoration: none;
+    color: black;
+    /* border:2px solid lightblue; */
+}
