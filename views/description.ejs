@@ -1,0 +1,46 @@
+<% layout("boilerplate") %>
+
+<body>
+    
+    <form method="get" action="/" novalidate class="needs-validation" enctype="multipart/form-data">
+
+
+        <h2>Final Description</h2>
+        <p class="mt-3">Prepare test Description To Help recruiters choose best test</p>
+        <br>
+        <h4>Description</h4>
+        <br>
+        <div class="mb-3">
+            <label for="title" class="form-label">What</label>
+            <textarea name="listing[description]" placeholder="Type Something.." class="form-control" required></textarea>
+            <div class="valid-feedback"> Title Looks good! </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">This Test Is Relevant For ?</label>
+            <textarea name="listing[description]" placeholder="Type Something.." class="form-control" required></textarea>
+            <div class="invalid-feedback"> Description is required </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="listing[description]" placeholder="Type Something.." class="form-control" required></textarea>
+            <div class="invalid-feedback"> Description is required </div>    
+        </div>
+        <br>
+        <h4>Overview</h4>
+         <br>
+        <div class="mb-3">
+            <label for="title" class="form-label">Highlighted Features</label>
+            <input type="text" placeholder="Type Something.. " name="listing[title]" class="form-control" required>
+            <div class="valid-feedback"> Title Looks good! </div>
+        </div>
+        <br>
+        <h4>About Author</h4>
+        <br>
+        <p>Author details will be Displayed.</p>
+        <br><br>
+        <button class="btn btn-dark" class="mb-5"> Publish</button>
+        <br>
+    </form>
+</body>
