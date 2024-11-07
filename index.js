@@ -38,14 +38,19 @@ app.get("/addquestions",(req,res)=>{
     res.render("./Test/addquestion.ejs");
 });
 
-app.get("/register",(req,res)=>{
-
-    res.render("./user/register.ejs");
-})
-
 app.get("/description",(req,res)=>{
 
     res.render("./Test/description.ejs")
+});
+
+app.get("/register",(req,res)=>{
+
+    res.render("./user/register.ejs");
+});
+
+app.get("/login",(req,res)=>{
+
+    res.render("./user/login.ejs");
 })
 
 app.all("*",(req,res,next)=>{
