@@ -5,7 +5,11 @@ const mongoose =require("mongoose");
 const method=require("method-override");                                // Form Contains Only two methods(get,post) ,but to make it convertable this package is reuired.
 const Expresserror=require("./ExpressUserDefinedError")
 const path=require("path");                                             // For Setting Deafult Paths
-const ejsmate=require("ejs-mate"); 
+const ejsmate=require("ejs-mate");
+const session = require("express-session");                             // To create seesion id for every user who browses our website (stores some imp inf in temprorary storage {ex:amazon cart})
+const flash =require("connect-flash");                                  // To flash The Message Only once.
+const passport=require("passport");                                     // Used For Authentication And Authorization.
+const LocalStrategy=require("passport-local");                          // Startegy In Passport Used For Authentication. 
 
 app.set("view engine","ejs");                                    // When The Response Is 'Rendered' default path to access.
 app.set("views",path.join(__dirname,"/views"));               
