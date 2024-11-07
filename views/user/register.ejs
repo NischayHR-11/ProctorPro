@@ -1,0 +1,34 @@
+<% layout("/layouts/boilerplateuser") %>
+
+<body>
+
+    <div class="row">
+
+        <form action="/signup" method="post"  class=" col-5 needs-validation offset-3" style="margin-top: .5rem;margin-bottom: 1rem;">
+
+
+            <img src="/images/Online coding.png" alt="Company Logo" style="margin-bottom: 1.5rem; width: 80%; display: block;">
+            <br>
+        
+            <div class="mb-3">
+                <label for="username" class="form-label mb-2">Username</label>
+                <input type="text" placeholder="" name="username" class="form-control" required>
+                <div class="valid-feedback"> Looks good! </div>
+            </div>
+        
+            <div class="mb-3">
+                <label for="email" class="form-label mb-2">Email</label>
+                <input type="text" placeholder="@gmail.com" name="email" class="form-control" required>
+            </div>
+        
+            <div class="mb-5">
+                <label for="password" class="form-label mb-2">password</label>
+                <input type="password" placeholder="Enter password" name="password" class="form-control" required>
+            </div>
+        
+            <button class="btn btn-success" class="mb-5">Register</button>
+            <br>
+        </form>
+
+    </div>
+</body>

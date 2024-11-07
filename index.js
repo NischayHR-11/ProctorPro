@@ -21,22 +21,27 @@ app.listen(port,(req,res)=>{
 
 app.get("/",(req,res)=>{
 
-    res.render("./index.ejs");
+    res.render("./Test/index.ejs");
 });
 
 app.post("/test",(req,res)=>{
 
-    res.render("./createTest.ejs");
+    res.render("./Test/createTest.ejs");
 });
 
 app.get("/addquestions",(req,res)=>{
 
-    res.render("./addquestion.ejs");
+    res.render("./Test/addquestion.ejs");
 });
+
+app.get("/register",(req,res)=>{
+
+    res.render("./user/register.ejs");
+})
 
 app.get("/description",(req,res)=>{
 
-    res.render("./description.ejs")
+    res.render("./Test/description.ejs")
 })
 
 app.all("*",(req,res,next)=>{
