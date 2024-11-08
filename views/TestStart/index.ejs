@@ -1,30 +1,47 @@
 <% layout("/layouts/boilerplatestartTest") %>
 
 <body>
-    
-    <form method="get" action="/startTest" novalidate class="needs-validation col-6 offset-2" enctype="multipart/form-data" style="background-color: rgb(235, 235, 235,.4);border-radius: 1rem;padding: 1.5rem;">
-
-
+    <form method="post" action="/startTest" novalidate class="needs-validation col-6 offset-2"style="background-color: rgb(235, 235, 235,.4);border-radius: 1rem;padding: 1.5rem;">
         <h4>Online Test</h4>
-        <p class="mt-5">Question &nbsp;&nbsp;1 &nbsp;Of &nbsp;10</p>
+        <p class="mt-5">Question &nbsp;&nbsp;<%= number %> &nbsp;Of &nbsp;10</p>
         <br>
-        <h5>which Of The Following Is Brain Of Computer ?</h5>
+        <h5>Which Of The Following Is Brain Of Computer?</h5>
         <br>
-        <div class="mb-3" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
+        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
             <p class="ms-3 mt-2">A)&nbsp;&nbsp; Monitor</p>
         </div>
-        <div class="mb-3" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
+        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
             <p class="ms-3 mt-2">B)&nbsp;&nbsp; Mouse</p>
         </div>
-        <div class="mb-3" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
+        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
             <p class="ms-3 mt-2">C)&nbsp;&nbsp; Keyboard</p>
         </div>
-        <div class="mb-3" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
+        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
             <p class="ms-3 mt-2">D)&nbsp;&nbsp; CPU</p>
         </div>
 
         <br>
-        <button class="btn btn-primary " >Next</button>
+        <button class="btn btn-primary" type="submit" name="number" value="<%= number %>">Next</button>
         <br>
     </form>
+
+    <script>
+        const optionDivs = document.querySelectorAll('.option');
+    
+        optionDivs.forEach(div => {
+            div.addEventListener('click', function() {
+
+                // Reset border and background for all options
+                optionDivs.forEach(d => {
+                    d.style.border = '1px solid rgb(128, 128, 128,.5)';
+                    d.style.backgroundColor = 'transparent';  // Reset background
+                });
+    
+                // Set border color to lightblue and add shaded sky blue background for the clicked option
+                this.style.border = '2px solid lightblue';
+                this.style.backgroundColor = 'rgba(135, 206, 250, 0.2)'; // Sky blue with transparency
+            });
+        });
+    </script>
+    
 </body>
