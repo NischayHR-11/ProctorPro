@@ -27,34 +27,54 @@
 
         <div class="choice col-5">
 
-            <a href="/singlechoice"  class=" subchoice col-4">
-                <div class="">
-                    <i class="fa-regular fa-circle-check mb-2 ms-5"></i>
+            
+                <div class="subchoice col-4">
+                    <i class="fa-regular fa-circle-check "></i>
                     <p>singlechoice</p>
                 </div>
-            </a>
-            <a href="/Multiplechoice" class="subchoice col-4">
-                <div class="">
-                    <i class="fa-regular fa-square-check mb-2 ms-5"></i>
+
+            
+                <div class="subchoice col-4">
+                    <i class="fa-regular fa-square-check "></i>
                     <p>multiplechoice</p>
                 </div>
-            </a>
-            <a href="/Video" class="subchoice col-4" >
-                <div class="">
-                    <i class="fa-solid fa-video mb-2 ms-2"></i>
+            
+            
+                <div class="subchoice col-4">
+                    <i class="fa-solid fa-video "></i>
                     <p>video</p>
                 </div>
-            </a>
-            <a href="/Upload" class="subchoice col-4">
-                <div class="">
-                    <i class="fa-solid fa-arrow-up-from-bracket mb-2 ms-3"></i>
+            
+            
+                <div class="subchoice col-4">
+                    <i class="fa-solid fa-arrow-up-from-bracket "></i>
                     <p>upload</p>
                 </div>
-            </a>
+            
                 
         </div>
 
         <button class="btn btn-dark mt-3" style="padding: 1rem;" >Build a test </button>
         <br>
     </form>
+
+    <script>
+        const subchoiceDivs = document.querySelectorAll('.subchoice');
+    
+        subchoiceDivs.forEach(div => {
+            div.addEventListener('click', function() {
+
+                // Reset border and background for all options
+                subchoiceDivs.forEach(d => {
+                    d.style.border = '1px solid rgb(128, 128, 128,.5)';
+                    d.style.backgroundColor = '#EBEBEB';  // Reset background
+                });
+    
+                // Set border color to lightblue and add shaded sky blue background for the clicked option
+                this.style.border = '2px solid lightblue';
+                this.style.backgroundColor = 'rgba(135, 206, 250, 0.2)'; // Sky blue with transparency
+            });
+        });
+    </script>
+
 </body>
