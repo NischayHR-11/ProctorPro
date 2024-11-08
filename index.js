@@ -48,6 +48,11 @@ app.get("/register",(req,res)=>{
     res.render("./user/register.ejs");
 });
 
+app.get("/startTest",(req,res)=>{
+
+    res.render("./TestStart/index.ejs");
+})
+
 app.get("/login",(req,res)=>{
 
     res.render("./user/login.ejs");
