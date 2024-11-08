@@ -1,0 +1,82 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    
+    <h2>Prepare Questions </h2>
+    <br>
+
+    <form action="/Description">
+
+        
+    </form>
+    <div class="row">
+
+        <form method="get" class="col-6" action="/addquestions" novalidate class="needs-validation" enctype="multipart/form-data" style="background-color: #EBEBEB;border-radius: 1rem;padding: 1.5rem;">
+
+            <h5 class="mb-5 ms-3">Question</h5>
+    
+            <div class="mb-3 col-6">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" placeholder="Which One Describes You Better " name="title" class="form-control" required>
+                <div class="valid-feedback"> Title Looks good! </div>
+            </div>
+    
+            <div class="mb-3 col-6">
+                <label for="title" class="form-label">Description</label>
+                <input type="text" placeholder="Type Something.." name="title" class="form-control" required>
+                <div class="valid-feedback"> Title Looks good! </div>
+            </div>
+    
+            <h5 class="mb-4 ms-3 mt-5">Answer</h5>
+    
+            <div class="mb-3 col-6" style="display: flex;align-items: center;justify-content: center;">
+                <input type="text" placeholder="choice 1" name="title" class="form-control" required>
+                <div class="valid-feedback"> Title Looks good! </div>
+                <i class="fa-solid fa-trash ms-3"></i>
+            </div>
+            <div class="mb-3 col-6" style="display: flex;align-items: center;justify-content: center;">
+                <input type="text" placeholder="choice 2" name="title" class="form-control" required>
+                <i class="fa-solid fa-trash ms-3"></i>
+                <div class="valid-feedback "> Title Looks good! </div>
+            </div>
+    
+            <div class="mb-3 col-6" style="display: flex;align-items: center;justify-content: center;">
+                <input type="text" placeholder="choice 3" name="title" class="form-control" required>
+                <i class="fa-solid fa-trash ms-3"></i>
+                <div class="valid-feedback"> Title Looks good! </div>
+            </div>
+
+            <div class="mb-3 col-6" style="display: flex;align-items: center;justify-content: center;">
+                <input type="text" placeholder="choice 4" name="title" class="form-control" required>
+                <i class="fa-solid fa-trash ms-3"></i>
+                <div class="valid-feedback"> Title Looks good! </div>
+            </div>
+    
+            <button class="btn btn-outline-primary mt-3"><i class="fa-solid fa-plus me-2"></i> Add Answers</button>
+            <hr>
+            <button class="btn btn-dark">Cancel</button>
+            <button class="btn btn-success ms-5">Save and Submit</button>
+        </form>
+
+        <form method="get" class="col-4 ms-5 " action="/addquestions" novalidate class="needs-validation" enctype="multipart/form-data" style="background-color: transparent;border-radius: 1rem;padding: 1.5rem;">
+
+        <div style="background-color: antiquewhite;height: 6rem;border-radius: 1rem;display: flex;align-items: center;justify-content: center;">
+            <div class="subdiv" style="display: flex;align-items: center;justify-content: center;flex-direction: column;">
+                <h6>Which One Describes Best ?</h6> 
+                <p>Multiplechoice</p>
+            </div>
+            <div class="subdiv1 ms-5" style="display: flex;align-items: center;justify-content: center;flex-direction: column;">
+                <i class="fa-solid fa-trash ms-3"></i>
+            </div>
+        </div>
+
+        <button class="btn btn-outline-primary mt-3" style="width: 100%;"><i class="fa-solid fa-plus me-3"></i> Add  Questions</button>
+        </form>
+
+    </div>
+
+    <hr>
+    <form action="/description"><button class="btn btn-danger" style="margin-left: 70rem;">Continue</button></form>
+   
+
+</body>
