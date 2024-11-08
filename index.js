@@ -15,6 +15,7 @@ app.set("view engine","ejs");                                    // When The Res
 app.set("views",path.join(__dirname,"/views"));               
 app.use(express.static(path.join(__dirname,"/public")));         // Default middleware : for default paths.
 app.use(express.urlencoded({extended:true}));                    // Default middleware : for get data sent from the request.
+app.use(express.json());
 app.use(method('_method'));
 app.engine("ejs",ejsmate); 
 
@@ -50,13 +51,31 @@ app.get("/register",(req,res)=>{
 
 app.get("/startTest",(req,res)=>{
 
-    res.render("./TestStart/index.ejs");
-})
+    const number=1;
+    res.render("./TestStart/index.ejs",{number});
+});
+
+app.post("/startTest",(req,res)=>{
+
+     // Parse the number from the form
+     console.log(req.body)
+     let number = parseInt(req.body.number, 10);
+
+     // If number is NaN (undefined or invalid), start from 1
+     if (isNaN(number)) {
+         number = 1;  // Default to question 1 if there's an issue with the number
+     } else {
+         number += 1;  // Increment the number for the next question
+     }
+ 
+     // Render the template with the new question number
+     res.render('TestStart/index.ejs', { number });
+});
 
 app.get("/login",(req,res)=>{
 
     res.render("./user/login.ejs");
-})
+});
 
 app.all("*",(req,res,next)=>{
 
