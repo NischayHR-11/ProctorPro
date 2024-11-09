@@ -10,6 +10,8 @@ const session = require("express-session");                             // To cr
 const flash =require("connect-flash");                                  // To flash The Message Only once.
 const passport=require("passport");                                     // Used For Authentication And Authorization.
 const LocalStrategy=require("passport-local");                          // Startegy In Passport Used For Authentication. 
+const testmodel=require("./models/Test");
+const user=require("./models/user");
 
 app.set("view engine","ejs");                                    // When The Response Is 'Rendered' default path to access.
 app.set("views",path.join(__dirname,"/views"));               
@@ -18,6 +20,19 @@ app.use(express.urlencoded({extended:true}));                    // Default midd
 app.use(express.json());
 app.use(method('_method'));
 app.engine("ejs",ejsmate); 
+
+
+main().then(()=>{                                                        // Since To Connect mongoDb To Backend (Server) is Asyncronous Process.                        
+    console.log("DATA BASE CONNECTED SUCCESSFULLY..");               
+})
+.catch((err)=>{
+    console.log(err);
+})
+
+async function main() {                                               // To Connect mongoDb To Backend (Server).
+    
+    await mongoose.connect("mongodb://127.0.0.1:27017/ProctorPro");                                      // MongoDB URL.
+}
 
 app.listen(port,(req,res)=>{
 
@@ -29,9 +44,14 @@ app.get("/",(req,res)=>{
     res.render("./Test/index.ejs");
 });
 
-app.post("/test",(req,res)=>{
+app.get("/test",(req,res)=>{
 
     res.render("./Test/createTest.ejs");
+});
+
+app.post("/test",(req,res)=>{
+
+    res.send(req.body);
 });
 
 app.get("/addquestions",(req,res)=>{
@@ -42,11 +62,6 @@ app.get("/addquestions",(req,res)=>{
 app.get("/description",(req,res)=>{
 
     res.render("./Test/description.ejs")
-});
-
-app.get("/register",(req,res)=>{
-
-    res.render("./user/register.ejs");
 });
 
 app.get("/startTest",(req,res)=>{
@@ -78,6 +93,11 @@ app.post("/startTest",(req,res)=>{
         res.render('TestStart/index.ejs', { number });
      }
 
+});
+
+app.get("/register",(req,res)=>{
+
+    res.render("./user/register.ejs");
 });
 
 app.get("/login",(req,res)=>{
