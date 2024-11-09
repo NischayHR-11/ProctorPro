@@ -1,80 +1,77 @@
 <% layout("/layouts/boilerplate") %>
 
 <body>
-    <form method="get" action="/addquestions" novalidate class="needs-validation" enctype="multipart/form-data">
-
-
+    <form method="post" action="/test" novalidate class="needs-validation">
         <h2>Create Test</h2>
         <p class="mt-3">Test Name And Type</p>
         <br>
 
         <div class="mb-3">
-            <label for="title" class="form-label">Test Name </label>
-            <input type="text" placeholder="Enter the Test name !! " name="testname" class="form-control" required>
+            <label for="title" class="form-label">Test Name</label>
+            <input type="text" placeholder="Enter the Test name !!" name="testname" class="form-control" required>
             <div class="valid-feedback"> Name Looks good! </div>
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Skills</label>
-            <select id="mySelect" name="mySelect" class="form-control" required>
-                <option value="option1">Tech</option>
-                <option value="option2">Non-Tech</option>
+            <select id="mySelect" name="skill" class="form-control" required>
+                <option value="Tech">Tech</option>
+                <option value="Non-Tech">Non-Tech</option>
             </select>
         </div>
 
-        <h4 class="mt-5"> Select The Type Of Test</h4>
+        <h4 class="mt-5">Select The Type Of Test</h4>
         <br>
 
         <div class="choice col-5">
+            <div class="subchoice col-4" data-value="singlechoice">
+                <i class="fa-regular fa-circle-check mb-2"></i>
+                <p>singlechoice</p>
+            </div>
 
-            
-                <div class="subchoice col-4">
-                    <i class="fa-regular fa-circle-check "></i>
-                    <p>singlechoice</p>
-                </div>
+            <div class="subchoice col-4" data-value="multiplechoice">
+                <i class="fa-regular fa-square-check mb-2"></i>
+                <p>multiplechoice</p>
+            </div>
 
-            
-                <div class="subchoice col-4">
-                    <i class="fa-regular fa-square-check "></i>
-                    <p>multiplechoice</p>
-                </div>
-            
-            
-                <div class="subchoice col-4">
-                    <i class="fa-solid fa-video "></i>
-                    <p>video</p>
-                </div>
-            
-            
-                <div class="subchoice col-4">
-                    <i class="fa-solid fa-arrow-up-from-bracket "></i>
-                    <p>upload</p>
-                </div>
-            
-                
+            <div class="subchoice col-4" data-value="coding">
+                <i class="fa-solid fa-code mb-2"></i>
+                <p>Coding</p>
+            </div>
+
+            <div class="subchoice col-4" data-value="hybrid">
+                <i class="fa-solid fa-infinity mb-2"></i>
+                <p>Hybrid</p>
+            </div>
         </div>
 
-        <button class="btn btn-dark mt-3" style="padding: 1rem;" >Build a test </button>
+        <!-- Hidden input to store the selected test type -->
+        <input type="hidden" name="testtype" id="testTypeInput" value="">
+
+        <button class="btn btn-dark mt-3" style="padding: 1rem;">Build a test</button>
         <br>
     </form>
 
     <script>
         const subchoiceDivs = document.querySelectorAll('.subchoice');
-    
+        const testTypeInput = document.getElementById('testTypeInput'); // Hidden input to store the test type
+
         subchoiceDivs.forEach(div => {
             div.addEventListener('click', function() {
-
                 // Reset border and background for all options
                 subchoiceDivs.forEach(d => {
-                    d.style.border = '1px solid rgb(128, 128, 128,.5)';
+                    d.style.border = '1px solid rgba(128, 128, 128, 0.5)';
                     d.style.backgroundColor = '#EBEBEB';  // Reset background
                 });
-    
+
                 // Set border color to lightblue and add shaded sky blue background for the clicked option
                 this.style.border = '2px solid lightblue';
                 this.style.backgroundColor = 'rgba(135, 206, 250, 0.2)'; // Sky blue with transparency
+
+                // Set the value of the hidden input to the selected test type
+                const selectedTestType = this.getAttribute('data-value');
+                testTypeInput.value = selectedTestType;
             });
         });
     </script>
-
 </body>
