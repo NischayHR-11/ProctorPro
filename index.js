@@ -67,9 +67,17 @@ app.post("/startTest",(req,res)=>{
      } else {
          number += 1;  // Increment the number for the next question
      }
- 
-     // Render the template with the new question number
-     res.render('TestStart/index.ejs', { number });
+
+     if(number===10){
+
+        res.render("TestStart/testend.ejs", { number });
+
+     }else{
+
+        // Render the template with the new question number
+        res.render('TestStart/index.ejs', { number });
+     }
+
 });
 
 app.get("/login",(req,res)=>{
