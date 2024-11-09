@@ -49,9 +49,14 @@ app.get("/test",(req,res)=>{
     res.render("./Test/createTest.ejs");
 });
 
-app.post("/test",(req,res)=>{
+app.post("/test",async(req,res)=>{
 
-    res.send(req.body);
+    let test=req.body;
+    let{testname,skill,testtype}=req.body;
+    
+    let d=await testmodel.create({name:testname , skills:skill ,type:testtype});
+    console.log(d);                                             
+    res.redirect("/addquestions");
 });
 
 app.get("/addquestions",(req,res)=>{
