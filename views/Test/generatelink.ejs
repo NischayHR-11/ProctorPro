@@ -1,0 +1,16 @@
+<% layout("/layouts/boilerplateuser") %>
+<body>
+    
+    <div style="height: 40vh;width: 100%;display: flex;align-items: center;justify-content: center">
+        <form id="startTestForm" action="/startTest/<%=id %>" method="GET" class="col-6" style="background-color: #f2f2f2;height: 5rem;display: flex;align-items: center;justify-content: center;border-radius: 1rem;">
+           Test Link : &nbsp;&nbsp;&nbsp;&nbsp; <a href="javascript:void(0)" id="startTestLink">/startTest/<%=id %></a>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById("startTestLink").addEventListener("click", function() {
+            document.getElementById("startTestForm").submit();
+        });
+    </script>
+
+</body>
