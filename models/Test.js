@@ -29,9 +29,11 @@ const TestSchema = new mongoose.Schema({
                     type: String,
                     required: true,
                 },
-            ]
+            ],
+            answer:Number,
         }
     ],
+    time:Number,
 
 });
 
