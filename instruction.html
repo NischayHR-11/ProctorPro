@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Full height and width setup */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .instructions-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Static Left Column */
+        .static-column {
+            width: 40%;
+            /* Left column 40% width */
+            background-color: #5ebd84;
+            color: white;
+            height: 100vh;
+            position: fixed;
+            /* Fixed position */
+            left: 0;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-right: 1px solid #dee2e6;
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .static-column h2 {
+            font-weight: bold;
+            font-size: 4rem;
+        }
+
+        /* Scrollable Right Column */
+        .scrollable-column {
+            background-color: #f2f2f2;
+            flex-grow: 1;
+            height: 100vh;
+            overflow-y: auto;
+            /* Enable scroll */
+            padding-left: 42%;
+            /* Adjust for the left column */
+            padding-right: 10px;
+        }
+
+        /* Section Style */
+        .section {
+            min-height: 100vh;
+            /* Ensure minimum height is 100vh */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: start;
+            /* Align text to start */
+            padding: 20px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        /* Section Content */
+        .section-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            /* Align content to the start */
+            text-align: start;
+            width: 80%;
+            /* Control the width of the content */
+        }
+
+        /* Button Style */
+        .btn {
+            margin-top: 20px;
+        }
+
+        /* Media Queries for Smaller Screens */
+        @media (max-width: 768px) {
+            .static-column {
+                width: 100%;
+                position: relative;
+                height: auto;
+                padding: 10px;
+            }
+
+            .instructions-container {
+                flex-direction: column;
+            }
+
+            .scrollable-column {
+                padding-left: 0;
+                /* Remove the left padding for smaller screens */
+                padding-top: 10px;
+                /* Add some top padding */
+            }
+
+            .static-column h2 {
+                font-size: 1.5em;
+            }
+
+            .section {
+                min-height: 100vh;
+                /* Ensure each section fills the screen */
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            .section-content {
+                width: 100%;
+                /* Make content fit smaller screen */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="instructions-container">
+            <!-- Static Column (left side) -->
+            <div class="static-column"
+                style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px;">
+                <h2>Welcome to the Test</h2>
+                <p>Please review the instructions carefully before beginning.</p>
+            </div>
+
+            <!-- Scrollable Column (right side) -->
+            <div class="scrollable-column">
+                <!-- General Instructions Section -->
+                <div class="section" id="general-instructions">
+                    <div class="section-content">
+                        <h2>GENERAL INSTRUCTIONS</h2>
+                        <p>1. Ensure a stable internet connection.</p>
+                        <p>2. Test your webcam and microphone (if required).</p>
+                        <p>3. Close all unnecessary applications to avoid distractions.</p>
+                        <p>4. Sit in a quiet, well-lit room.</p>
+                        <p>5. Remove unauthorized items and devices from your desk.</p>
+                        <p>6. Remain in front of your camera at all times.</p>
+                        <p>7. Avoid looking away from the screen frequently.</p>
+                        <p>8. Ensure that no other faces are visible to the camera at any time during the test.</p>
+                        <p>9. Use only approved resources as instructed.</p>
+                        <p>10. Do not use any phones, tablets, or other electronics unless allowed.</p>
+                        <p>11. Keep track of time. Some sections may have separate time limits.</p>
+                        <p>12. Contact technical support immediately if you encounter any technical problems.</p>
+                        <button class="btn btn-primary" onclick="showNextSection('test-specific')"
+                            style="background-color: #242e80;">Continue</button>
+                    </div>
+                </div>
+
+                <!-- Test-Specific Instructions Section -->
+                <div class="section" id="test-specific">
+                    <div class="section-content">
+                        <div class="specific-instructions" style="display: flex; gap: 40px;">
+                            <div style="flex: 1;">
+                                <h4 style="font-size: 1.2rem; text-align: start; margin-bottom: 20px;">TEST DURATION</h4>
+                                <div style="display: flex; background-color: #ffffff; border-radius: 20px; height: 150px; align-items: start; justify-content: center; flex-direction: column; padding:10px 10px 10px 20px;">
+                                    <p style="font-size: 1.5rem; font-weight: bold;">60 minutes</p>
+                                    <p style="font-size: 0.9rem; text-align: start;">After 60 minutes, the test will be automatically submitted.</p>
+                                </div>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="font-size: 1.2rem; text-align:start; margin-bottom: 20px;">NUMBER OF QUESTIONS</h4>
+                                <div style="display: flex; background-color: #ffffff; border-radius: 20px; height: 150px; align-items: start; justify-content: center; flex-direction: column; padding: 10px 10px 10px 20px;">
+                                    <p style="font-size: 1.5rem; font-weight: bold;">10 Questions</p>
+                                    <p style="font-size: 0.9rem; text-align: start;">You can submit your test after answering all the questions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="showNextSection('confirmation')"
+                            style="background-color: #242e80;margin-top: 50px;">Continue</button>
+                    </div>
+                </div>
+
+                <!-- Confirmation Section -->
+<div class="section" id="confirmation" style=" padding-top: 20px; margin-top: 20px;">
+    <div class="section-content">
+        <h3>Confirm and Proceed</h3>
+        
+        <!-- Brief Summary -->
+        <div style="margin-bottom: 15px;">
+            <p>Please review the following summary before beginning:</p>
+            <ul style="padding-left: 20px;">
+                <li><strong>Test Duration:</strong> 60 minutes</li>
+                <li><strong>Attempts Allowed:</strong> 1</li>
+                <li><strong>Auto-Submission:</strong> Your test will be auto-submitted after 60 minutes.</li>
+            </ul>
+        </div>
+        
+        <!-- Academic Integrity Notice -->
+        <div style="margin-bottom: 15px;">
+            <p><strong>Academic Integrity:</strong> By proceeding, you confirm that you will complete this test independently and refrain from using any unapproved resources.</p>
+        </div>
+        
+        <!-- Device and Environment Check -->
+        <div style="margin-bottom: 15px;">
+            <p><strong>Important:</strong> Ensure you are in a quiet, distraction-free environment. Avoid using additional devices or refreshing the test page to prevent interruptions.</p>
+        </div>
+        
+        <!-- Confirmation Checkboxes -->
+        <p><label><input type="checkbox" id="agree"> I agree to follow all instructions and maintain academic integrity.</label></p>
+        <p><label><input type="checkbox" id="ready"> I have reviewed the instructions and am ready to begin the test.</label></p>
+        
+        <!-- Start Button -->
+        <button class="btn btn-success" onclick="startTest()">Start Test</button>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSectionIndex = 0;
+        const sections = document.querySelectorAll('.section');
+
+        function showNextSection(sectionId) {
+            // Show the next section by scrolling
+            const nextSection = document.getElementById(sectionId);
+            if (nextSection) {
+                nextSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        }
+
+        function startTest() {
+            const agree = document.getElementById('agree').checked;
+            const ready = document.getElementById('ready').checked;
+            if (!agree || !ready) {
+                alert("Please confirm that you have read and understood the instructions.");
+            }else
+            {
+                window.location.href = 'test-page.html';
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
