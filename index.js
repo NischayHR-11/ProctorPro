@@ -52,24 +52,84 @@ app.get("/test",(req,res)=>{
 app.post("/test",async(req,res)=>{
 
     let test=req.body;
-    let{testname,skill,testtype}=req.body;
-    
-    let d=await testmodel.create({name:testname , skills:skill ,type:testtype});
+    let{testname,skill,testtype,time}=req.body;
+    let d=await testmodel.create({name:testname , skills:skill ,type:testtype ,time:time});
     console.log(d);                                             
-    res.redirect("/addquestions");
+    res.redirect(`${d._id}/addquestions`);
 });
 
-app.get("/addquestions",(req,res)=>{
+app.get("/:id/addquestions",async(req,res)=>{
 
-    res.render("./Test/addquestion.ejs");
+    let{id}=req.params;
+    const test = await testmodel.findById(id);
+    const questions=test.questions;
+    console.log(questions);
+    res.render("./Test/addquestion.ejs",{questions,id});
 });
 
-app.get("/description",(req,res)=>{
 
-    res.render("./Test/description.ejs")
+
+app.post("/:id/addquestions",async(req,res)=>{
+
+    let{id}=req.params;
+    let{title,choice1,choice2,choice3,choice4,answer}=req.body;
+    const test = await testmodel.findById(id);
+    const questions=test.questions;
+    const q={
+        title:title,
+        options:[choice1,choice2,choice3,choice4],
+        answer:answer
+    }
+    questions.push(q);
+    test.save();
+    console.log(test);
+    res.render("./Test/addquestion.ejs",{questions,id});
+});
+
+app.post("/:id/deletequestion/:index", async (req, res) => {
+
+    const { id, index } = req.params;
+    
+    try {
+        // Find the test by ID
+        const test = await testmodel.findById(id);
+        
+        // Remove the question at the specified index
+        if (test && test.questions.length > index) {
+            test.questions.splice(index, 1); // Remove the question at the specified index
+            await test.save(); // Save the updated test
+        }
+
+        // Redirect back to the add questions page
+        res.redirect(`/${id}/addquestions`);
+
+    } catch (error) {
+        console.error("Error deleting question:", error);
+        res.status(500).send("An error occurred while deleting the question.");
+    }
+});
+
+
+app.get("/:id/description",(req,res)=>{
+
+    let {id}=req.params;
+
+    res.render("./Test/description.ejs",{id});
+});
+
+app.get("/:id/generateLink",(req,res)=>{
+
+    let {id}=req.params;
+    res.render("./Test/generatelink.ejs",{id})
 });
 
 app.get("/startTest",(req,res)=>{
+
+    const number=1;
+    res.render("./TestStart/index.ejs",{number});
+});
+
+app.get("/startTest/:id",(req,res)=>{
 
     const number=1;
     res.render("./TestStart/index.ejs",{number});
