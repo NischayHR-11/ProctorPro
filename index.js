@@ -123,21 +123,39 @@ app.get("/:id/generateLink",(req,res)=>{
     res.render("./Test/generatelink.ejs",{id})
 });
 
+app.get("/instructions",(req,res)=>{
+
+    res.render("./TestStart/instructions.ejs")
+})
+
 app.get("/startTest",(req,res)=>{
 
     const number=1;
     res.render("./TestStart/index.ejs",{number});
 });
 
-app.get("/startTest/:id",(req,res)=>{
+app.get("/startTest/:id",async(req,res)=>{
 
+    let{id}=req.params;
+    const test = await testmodel.findById(id);
     const number=1;
-    res.render("./TestStart/index.ejs",{number});
+    res.render("./TestStart/index.ejs",{number,test});
 });
 
-app.post("/startTest",(req,res)=>{
+app.get("/startTest/:id/instructions",async(req,res)=>{
+
+    let{id}=req.params;
+    const test = await testmodel.findById(id);
+    const number=1;
+    res.render("./TestStart/instructions.ejs",{number,id,test});
+});
+
+app.post("/startTest/:id",async(req,res)=>{
 
      // Parse the number from the form
+     let{id}=req.params;
+     const test = await testmodel.findById(id);
+
      console.log(req.body)
      let number = parseInt(req.body.number, 10);
 
@@ -148,14 +166,14 @@ app.post("/startTest",(req,res)=>{
          number += 1;  // Increment the number for the next question
      }
 
-     if(number===10){
+     if(number===test.questions.length){
 
-        res.render("TestStart/testend.ejs", { number });
+        res.render("TestStart/testend.ejs", { number ,test,id});
 
      }else{
 
         // Render the template with the new question number
-        res.render('TestStart/index.ejs', { number });
+        res.render('TestStart/index.ejs', { number,id,test});
      }
 
 });

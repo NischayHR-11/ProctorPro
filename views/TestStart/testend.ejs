@@ -3,21 +3,21 @@
 <body>
     <form method="get" action="/" novalidate class="needs-validation col-6 offset-2"style="background-color: rgb(235, 235, 235,.4);border-radius: 1rem;padding: 1.5rem;">
         <h4>Online Test</h4>
-        <p class="mt-5">Question &nbsp;&nbsp;<%= number %> &nbsp;Of &nbsp;10</p>
+        <p class="mt-5">Question &nbsp;&nbsp;<%= number %> &nbsp;Of &nbsp;<%= test.questions.length %></p>
         <br>
-        <h5>Which Of The Following Is Brain Of Computer?</h5>
+        <h5><%= test.questions[number-1].title%>?</h5>
         <br>
         <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
-            <p class="ms-3 mt-2">A)&nbsp;&nbsp; Monitor</p>
+            <p class="ms-3 mt-2">A)&nbsp;&nbsp; <%= test.questions[number-1].options[0]%></p>
         </div>
         <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
-            <p class="ms-3 mt-2">B)&nbsp;&nbsp; Mouse</p>
+            <p class="ms-3 mt-2">B)&nbsp;&nbsp; <%= test.questions[number-1].options[1]%></p>
         </div>
         <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
-            <p class="ms-3 mt-2">C)&nbsp;&nbsp; Keyboard</p>
+            <p class="ms-3 mt-2">C)&nbsp;&nbsp; <%= test.questions[number-1].options[2]%></p>
         </div>
         <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
-            <p class="ms-3 mt-2">D)&nbsp;&nbsp; CPU</p>
+            <p class="ms-3 mt-2">D)&nbsp;&nbsp;<%= test.questions[number-1].options[3]%></p>
         </div>
 
         <br>

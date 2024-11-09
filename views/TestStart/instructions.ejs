@@ -134,7 +134,7 @@
             <!-- Static Column (left side) -->
             <div class="static-column"
                 style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px;">
-                <h2>Welcome to the Test</h2>
+                <h2>Welcome to the <%= test.name%></h2>
                 <p>Please review the instructions carefully before beginning.</p>
             </div>
 
@@ -168,14 +168,14 @@
                             <div style="flex: 1;">
                                 <h4 style="font-size: 1.2rem; text-align: start; margin-bottom: 20px;">TEST DURATION</h4>
                                 <div style="display: flex; background-color: #ffffff; border-radius: 20px; height: 150px; align-items: start; justify-content: center; flex-direction: column; padding:10px 10px 10px 20px;">
-                                    <p style="font-size: 1.5rem; font-weight: bold;">60 minutes</p>
-                                    <p style="font-size: 0.9rem; text-align: start;">After 60 minutes, the test will be automatically submitted.</p>
+                                    <p style="font-size: 1.5rem; font-weight: bold;"><%= test.time%></p>
+                                    <p style="font-size: 0.9rem; text-align: start;">After <%= test.time%> minutes, the test will be automatically submitted.</p>
                                 </div>
                             </div>
                             <div style="flex: 1;">
                                 <h4 style="font-size: 1.2rem; text-align:start; margin-bottom: 20px;">NUMBER OF QUESTIONS</h4>
                                 <div style="display: flex; background-color: #ffffff; border-radius: 20px; height: 150px; align-items: start; justify-content: center; flex-direction: column; padding: 10px 10px 10px 20px;">
-                                    <p style="font-size: 1.5rem; font-weight: bold;">10 Questions</p>
+                                    <p style="font-size: 1.5rem; font-weight: bold;"><%= test.questions.length%> Questions</p>
                                     <p style="font-size: 0.9rem; text-align: start;">You can submit your test after answering all the questions.</p>
                                 </div>
                             </div>
@@ -195,9 +195,9 @@
         <div style="margin-bottom: 15px;">
             <p>Please review the following summary before beginning:</p>
             <ul style="padding-left: 20px;">
-                <li><strong>Test Duration:</strong> 60 minutes</li>
+                <li><strong>Test Duration:</strong> <%= test.time%> minutes</li>
                 <li><strong>Attempts Allowed:</strong> 1</li>
-                <li><strong>Auto-Submission:</strong> Your test will be auto-submitted after 60 minutes.</li>
+                <li><strong>Auto-Submission:</strong> Your test will be auto-submitted after <%= test.time%> minutes.</li>
             </ul>
         </div>
         
@@ -216,7 +216,8 @@
         <p><label><input type="checkbox" id="ready"> I have reviewed the instructions and am ready to begin the test.</label></p>
         
         <!-- Start Button -->
-        <button class="btn btn-success" onclick="startTest()">Start Test</button>
+        <button class="btn btn-success" onclick="startTest()" type="submit">Start Test</button>
+        
     </div>
 </div>
 
@@ -243,7 +244,7 @@
                 alert("Please confirm that you have read and understood the instructions.");
             }else
             {
-                window.location.href = 'test-page.html';
+                window.location.href = '/startTest/<%=id%>';
             }
         }
     </script>
