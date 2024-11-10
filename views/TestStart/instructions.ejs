@@ -216,7 +216,7 @@
         <p><label><input type="checkbox" id="ready"> I have reviewed the instructions and am ready to begin the test.</label></p>
         
         <!-- Start Button -->
-        <button  class="btn btn-success" onclick="startTest()" type="submit">Start Test</button>
+        <form action="/testcamera/<%=id %>" method="get" onsubmit="return startTest()"><button  class="btn btn-success" type="submit">Start Test</button></form>
         
     </div>
 </div>
@@ -242,9 +242,10 @@
             const ready = document.getElementById('ready').checked;
             if (!agree || !ready) {
                 alert("Please confirm that you have read and understood the instructions.");
+                return false;
             }else
             {
-                 window.location.href = '/startTest/<%=id%>';
+                return true;
             }
         }
     </script>

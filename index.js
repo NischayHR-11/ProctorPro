@@ -128,6 +128,12 @@ app.get("/instructions",(req,res)=>{
     res.render("./TestStart/instructions.ejs")
 })
 
+app.get("/testcamera/:id",(req,res)=>{
+    
+    let{id}=req.params;
+    res.render("./TestStart/testcamera.ejs",{id})
+})
+
 app.get("/startTest",(req,res)=>{
 
     const number=1;
@@ -139,7 +145,7 @@ app.get("/startTest/:id",async(req,res)=>{
     let{id}=req.params;
     const test = await testmodel.findById(id);
     const number=1;
-    res.render("./TestStart/index.ejs",{number,test});
+    res.render("./TestStart/index.ejs",{number,test,id});
 });
 
 app.get("/startTest/:id/instructions",async(req,res)=>{
