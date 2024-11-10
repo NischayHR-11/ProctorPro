@@ -24,46 +24,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="/javascript/form.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
-    <script>
-        const testDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
-
-        // Retrieve the stored start time from localStorage
-        let startTime = localStorage.getItem('testStartTime');
-        let endTime;
-
-        if (!startTime) {
-            // If no start time exists, redirect back to page 1 (Start Test page)
-            window.location.href = 'page1.html';
-        } else {
-            // If start time exists, calculate the end time based on stored start time
-            startTime = parseInt(startTime);
-            endTime = parseInt(localStorage.getItem('testEndTime'));
-        }
-
-        // Function to update the timer
-        function updateTimer() {
-            const remainingTime = endTime - Date.now(); // Calculate remaining time
-            if (remainingTime <= 0) {
-                document.getElementById('timer').innerText = "Time's up!";
-                clearInterval(timerInterval); // Stop the timer when time's up
-            } else {
-                document.getElementById('timer').innerText = formatTime(remainingTime);
-            }
-        }
-
-        // Function to format the remaining time as MM:SS
-        function formatTime(ms) {
-            const totalSeconds = Math.floor(ms / 1000);
-            const minutes = Math.floor(totalSeconds / 60);
-            const seconds = totalSeconds % 60;
-            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
-
-        // Immediately set the timer on page load
-        updateTimer();
-
-        // Update the timer every second
-        const timerInterval = setInterval(updateTimer, 1000);
-    </script>
+    
 </body>
 </html>

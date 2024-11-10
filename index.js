@@ -12,6 +12,8 @@ const passport=require("passport");                                     // Used 
 const LocalStrategy=require("passport-local");                          // Startegy In Passport Used For Authentication. 
 const testmodel=require("./models/Test");
 const user=require("./models/user");
+const { spawn } = require('child_process');
+const fetch = require('node-fetch');
 
 app.set("view engine","ejs");                                    // When The Response Is 'Rendered' default path to access.
 app.set("views",path.join(__dirname,"/views"));               

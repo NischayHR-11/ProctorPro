@@ -1,11 +1,10 @@
 {
-  "name": "onlinetest-ai-facedetection",
+  "name": "onlinetest",
   "version": "1.0.0",
-  "description": "This Repo Contains The Implementation of OnlineTest Web Application and AI Face Detection.",
+  "description": "This Repo Contains The Implementation  OnlineTest Web Application.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -22,8 +21,6 @@
     "nodemon": "^3.1.7",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^8.0.0",
-    "node-fetch": "^2.6.7"
+    "passport-local-mongoose": "^8.0.0"
   }
 }
-
