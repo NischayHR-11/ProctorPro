@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Detection Stream</title>
+    <style>
+        #video-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Proctor - Face Detection Stream</h1>
+    
+    <!-- Video Stream -->
+    <div id="video-container">
+        <img src="/video-stream" alt="Video Stream" width="640" height="480">
+    </div>
+
+    <script>
+        // Function to periodically check the missed frames and face alerts
+        function checkMissedFrames() {
+            fetch('/missed-frames')
+                .then(response => response.json())
+                .then(data => {
+                    // If there is an alert message, trigger the JavaScript alert
+                    if (data.alert_message) {
+                        alert(data.alert_message);
+                    }
+                })
+                .catch(error => console.error('Error fetching missed frames:', error));
+        }
+
+        // Check missed frames every 2 seconds
+        setInterval(checkMissedFrames, 2000);
+    </script>
+</body>
+</html>
