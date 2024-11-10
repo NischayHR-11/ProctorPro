@@ -17,9 +17,51 @@
       </div>
 
       <div class="time ms-auto me-3" style="display: flex;">
-      <p >Time : 00:00</p>
+        <p id="timer" style="font-size: 1.2rem;">Time: 00:00</p>
       </div>
       <hr>
     </div>
   </div>
 </nav>
+<script>
+  // Set the total time limit in seconds (e.g., 30 minutes)
+  const totalTime = parseInt("<%= test.time %>") * 60; // 30 minutes
+  // Check if there's a saved time in localStorage; only set `timeLeft` if not already set
+  let timeLeft = parseInt(localStorage.getItem("timeLeft"));
+  if (isNaN(timeLeft)) {
+      // If no time is stored (first load), set to total time and store it
+      timeLeft = totalTime;
+      localStorage.setItem("timeLeft", timeLeft);
+  }
+
+  // Function to format the time as mm:ss and update the timer display
+  function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = seconds % 60;
+      return `Time: ${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+  }
+
+  // Display the initial timer value from localStorage immediately on page load
+  document.getElementById("timer").textContent = formatTime(timeLeft);
+
+  // Function to update the timer display every second
+  function updateTimer() {
+      if (timeLeft > 0) {
+          timeLeft--;
+          document.getElementById("timer").textContent = formatTime(timeLeft); // Update display
+          localStorage.setItem("timeLeft", timeLeft); // Save to localStorage
+      } else {
+          clearInterval(timerInterval);
+          localStorage.removeItem("timeLeft"); // Clear saved time when timer ends
+          alert("Time is up!");
+      }
+  }
+
+  // Start the timer interval after setting the initial display value
+  const timerInterval = setInterval(updateTimer, 1000);
+
+  // Clear `timeLeft` from localStorage only when the test is completed or the timer ends
+  window.addEventListener("beforeunload", () => {
+      if (timeLeft <= 0) localStorage.removeItem("timeLeft");
+  });
+</script>
