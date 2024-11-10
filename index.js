@@ -12,6 +12,7 @@ const passport=require("passport");                                     // Used 
 const LocalStrategy=require("passport-local");                          // Startegy In Passport Used For Authentication. 
 const testmodel=require("./models/Test");
 const user=require("./models/user");
+const isloggedin=require("./AuthenticationMiddleWare");
 
 app.set("view engine","ejs");                                    // When The Response Is 'Rendered' default path to access.
 app.set("views",path.join(__dirname,"/views"));               
@@ -34,6 +35,35 @@ async function main() {                                               // To Conn
     await mongoose.connect("mongodb+srv://nischayhr11:Nischay1@cluster0.6p9g1.mongodb.net/Proctorpro?retryWrites=true&w=majority&appName=Cluster0");                                      // MongoDB URL.
 }
 
+const sessionoptions = {
+    secret : "mysupersceretcode",
+    resave : false,
+    saveUninitialized:true,
+    cookie :{
+
+        expires : Date.now() + 7*24*60*60*1000,       // expiry of the session cookie.
+        maxAge :  7*24*60*60*1000,
+    }
+
+}
+
+app.use(session(sessionoptions));
+app.use(flash());
+
+app.use(passport.initialize());                      // Passport Used For Athentication.{ should be defined after Session Middle Ware.}
+app.use(passport.session());
+passport.use(new LocalStrategy(user.authenticate()));    // Do Not Miss The Brackets In user.authenticate It is a method!! {wasted 4 hours}
+passport.serializeUser(user.serializeUser());                // To Store The User Data into the Session.
+passport.deserializeUser(user.deserializeUser());            // To Remove The User Data From The Session.
+
+app.use((req,res,next)=>{
+
+    res.locals.success=req.flash("success");                // saves the success flash message to be printed, in browser storeage(treated like global variables). 
+    res.locals.error=req.flash("error");                    // saves the error flash message to be printed, in browser storeage(treated like global variables).
+    res.locals.curuser=req.user;                            // Storing Information of User For Automatic login after signUp. {locals == global variables}.
+    next();
+})
+
 app.listen(port,(req,res)=>{
 
     console.log("server Started..");
@@ -44,7 +74,7 @@ app.get("/",(req,res)=>{
     res.render("./Test/index.ejs");
 });
 
-app.get("/test",(req,res)=>{
+app.get("/test",isloggedin,(req,res)=>{
 
     res.render("./Test/createTest.ejs");
 });
@@ -123,7 +153,7 @@ app.get("/:id/generateLink",(req,res)=>{
     res.render("./Test/generatelink.ejs",{id})
 });
 
-app.get("/instructions",(req,res)=>{
+app.get("/instructions",isloggedin,(req,res)=>{
 
     res.render("./TestStart/instructions.ejs")
 })
@@ -134,13 +164,13 @@ app.get("/testcamera/:id",(req,res)=>{
     res.render("./TestStart/testcamera.ejs",{id})
 })
 
-app.get("/startTest",(req,res)=>{
+app.get("/startTest",isloggedin,(req,res)=>{
 
     const number=1;
     res.render("./TestStart/index.ejs",{number});
 });
 
-app.get("/startTest/:id",async(req,res)=>{
+app.get("/startTest/:id",isloggedin,async(req,res)=>{
 
     let{id}=req.params;
     const test = await testmodel.findById(id);
@@ -148,7 +178,7 @@ app.get("/startTest/:id",async(req,res)=>{
     res.render("./TestStart/index.ejs",{number,test,id});
 });
 
-app.get("/startTest/:id/instructions",async(req,res)=>{
+app.get("/startTest/:id/instructions",isloggedin,async(req,res)=>{
 
     let{id}=req.params;
     const test = await testmodel.findById(id);
@@ -238,6 +268,24 @@ app.post("/login",passport.authenticate("local",{ failureRedirect:'/login', fail
         res.redirect("/");
     }
 );
+
+app.get("/logout",(req,res,next)=>{
+
+    let username=req.user.username;
+
+    req.logout((err)=>{                    // For Loging Out The User.
+
+        if(err){
+
+            next(err);
+        }else{
+
+            req.flash("success",`'${username}' LoggedOut Successfully... `);
+            res.redirect("/");
+        }
+
+    })
+})
 
 app.all("*",(req,res,next)=>{
 
