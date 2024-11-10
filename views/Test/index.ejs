@@ -6,10 +6,10 @@
     <title>ProctorPro</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/style1.css">
-</head
+</head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ffffff; padding: 20px; font-size: 1.2em; z-index: 1050;">
-        <a class="navbar-brand" href="#" style="font-weight: bold; font-size: 1em;">PROCTOR PRO</a>
+        <a class="navbar-brand" href="/" style="font-weight: bold; font-size: 1em;">PROCTOR PRO</a>
         
         <!-- Hamburger Button (Navbar Toggler) -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> 
@@ -20,16 +20,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-right: 20vh;">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#" style="font-size: 0.9em;">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/" style="font-size: 0.9em;">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item" style="margin-left: 10px;">
-                    <a class="nav-link" href="#" style="font-size: 0.9em;">Features</a>
+                    <a class="nav-link" href="#carouselExample" style="font-size: 0.9em;">Features</a>
                 </li>
                 <li class="nav-item" style="margin-left: 10px;">
-                    <a class="nav-link" href="#" style="font-size: 0.9em;">About</a>
+                    <a class="nav-link" href="#above-footer" style="font-size: 0.9em;">About</a>
                 </li>
                 <li class="nav-item" style="margin-left: 10px;">
-                    <a class="nav-link" href="#" style="font-size: 0.9em;">Contact</a>
+                    <a class="nav-link" href="#footer" style="font-size: 0.9em;">Contact</a>
                 </li>
                 <li class="nav-item" style="margin-left: 15px;">
                     <a href="/login" class="nav-link" style="font-size: 0.9em; display: flex; align-items: center; justify-content: center; background-color: rgb(94, 189, 132); border-radius: 20px; padding: 5px 20px 7px 20px;">
@@ -92,7 +92,7 @@
             </div>
         </div>
     </section>
-    <div id="carouselExample" class="carousel slide" data-ride="carousel" data-touch="true" data-interval="3000" data-pause="false">
+        <div id="carouselExample" class="carousel slide" data-ride="carousel" data-touch="true" data-interval="3000" data-pause="false">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="d-flex flex-column align-items-center justify-content-center carousel-item-content" style="background-color: #f2f2f2;">
@@ -198,7 +198,6 @@
             }
         }
     </style>
-    
        
     <section class="middleremove navbar navbar-expand-lg" style="background-color: #242e80; height: 30vh; display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; padding: 0 20px; text-align: center;">
         <div style="font-size: 40px; color: white; font-weight: bold; flex: 1;">
@@ -206,7 +205,8 @@
         </div>
         <div class="button-container" style="display: flex; gap: 10px; justify-content: center; flex: 1;">
             <button class="button-18" role="button">Take demo</button>
-            <button class="button-18" role="button">Create a test</button>
+            <button class="button-18" role="button" onclick="window.location.href='/test'">Create a Test</button>
+
         </div>
     </section>
     
@@ -232,7 +232,7 @@
         }
     </style>
     
-      <section class="above-footer" style="width: 100%;">
+      <section id="above-footer" class="above-footer" style="width: 100%;">
         <div class="container-middle" style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; flex-wrap: wrap; gap: 20px; box-sizing: border-box;">
             
             <div class="section-center" style="width: 48%; padding: 0 10px; box-sizing: border-box;">
@@ -332,7 +332,7 @@
 
 
 
-<footer class="custom-footer navbar navbar-expand-lg navbar-light" style="background-color: #000000; padding: 20px 20px; font-size: 1em; color: #ffffff; height: auto;">
+<footer id="footer" class="custom-footer navbar navbar-expand-lg navbar-light" style="background-color: #000000; padding: 20px 20px; font-size: 1em; color: #ffffff; height: auto;">
     <a class="navbar-brand" href="#" style="font-weight: bold; font-size: 1.5em; color: #ffffff;">Proctor Pro</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerContent" aria-controls="footerContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon" style="background-color: #ffffff;"></span> <!-- Hamburger icon color changed to white -->
@@ -341,22 +341,22 @@
     <div class="collapse navbar-collapse" id="footerContent" style="padding-right: 0; color: #ffffff;">
         <ul class="navbar-nav ml-auto" style="display: flex; justify-content: center; flex-wrap: wrap; margin-left: 0;">
             <li class="nav-item1 active">
-                <a class="nav-link" href="#" style="font-size: 1em; color: #ffffff;">Blog</a>
+                <a class="nav-link" href="#carouselExample" style="font-size: 1em; color: #ffffff;">Blog</a>
             </li>
             <li class="nav-item1" style="margin-left: 10px;">
-                <a class="nav-link" href="#" style="font-size: 1em; color: #ffffff;">About us</a>
+                <a class="nav-link" href="#above-footer" style="font-size: 1em; color: #ffffff;">About us</a>
             </li>
             <li class="nav-item1" style="margin-left: 10px;">
-                <a class="nav-link" href="#" style="font-size: 1em; color: #ffffff;">Socials</a>
+                <a class="nav-link" href="#footer" style="font-size: 1em; color: #ffffff;">Socials</a>
             </li>
             <li class="nav-item1" style="margin-left: 10px;">
-                <a class="nav-link" href="#" style="font-size: 1em; color: #ffffff;">Contact</a>
+                <a class="nav-link" href="#footer" style="font-size: 1em; color: #ffffff;">Contact</a>
             </li>
             <li class="nav-item1" style="margin-left: 15px;">
-                <div class="nav-link" style="font-size: 1em; display: flex; align-items: center; justify-content: center; background-color: rgb(94, 189, 132); border-radius: 20px; color: #000000; padding: 5px 20px 7px 20px;">
+                <a href="/login" class="nav-link" style="font-size: 1em; display: flex; align-items: center; justify-content: center; background-color: rgb(94, 189, 132); border-radius: 20px; color: #000000; padding: 5px 20px 7px 20px;">
                     <strong>Login</strong>
                     <img src="/images/arrow.png" alt="" style="height: 20px; margin-left: 5px;">
-                </div>
+                </a>
             </li>
         </ul>
     </div>
