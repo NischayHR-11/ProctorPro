@@ -31,7 +31,7 @@ main().then(()=>{                                                        // Sinc
 
 async function main() {                                               // To Connect mongoDb To Backend (Server).
     
-    await mongoose.connect("mongodb://127.0.0.1:27017/ProctorPro");                                      // MongoDB URL.
+    await mongoose.connect("mongodb+srv://nischayhr11:Nischay1@cluster0.6p9g1.mongodb.net/Proctorpro?retryWrites=true&w=majority&appName=Cluster0");                                      // MongoDB URL.
 }
 
 app.listen(port,(req,res)=>{
@@ -178,15 +178,60 @@ app.post("/startTest/:id",async(req,res)=>{
 
 });
 
-app.get("/register",(req,res)=>{
-
-    res.render("./user/register.ejs");
-});
-
 app.get("/login",(req,res)=>{
 
     res.render("./user/login.ejs");
 });
+
+app.get("/signup",(req,res)=>{
+
+    res.render("user/signup.ejs");
+})
+
+app.post("/signup",async(req,res,next)=>{
+
+    try{
+
+        let{username,email,password}=req.body;
+        let curuser =new user({username:username,email:email});
+        const registereduser=await user.register(curuser,password);
+        console.log(registereduser);
+        req.logIn(registereduser,(err)=>{     // Automatically Logins The User After SignUp.
+
+            if(!email.endsWith("@gmail.com")){
+
+                req.flash("error"," Enter  Valid  Email !!!");
+                res.redirect("/signup");
+
+            }else if(err){
+
+                next(err);
+
+            }else{
+
+                req.flash("success",`Welcome To Roomzy , ${username}.....`);
+                res.redirect("/");
+            }
+        });
+
+    }catch(err){
+
+        req.flash("error", "User Already Exsists With This Userame , Please Try Again.");
+        res.redirect("/signup");
+    }
+});
+
+app.get("/login",(req,res)=>{
+    res.render("user/login.ejs");
+});
+
+app.post("/login",passport.authenticate("local",{ failureRedirect:'/login', failureFlash: true}),async(req,res)=>{    // automatically Authenticates The User.
+
+        let{username}=req.body;
+        req.flash("success",`Welcome Back To Roomzy '${username}' ,  You Are Logedin !!! ....`);
+        res.redirect("/");
+    }
+);
 
 app.all("*",(req,res,next)=>{
 
