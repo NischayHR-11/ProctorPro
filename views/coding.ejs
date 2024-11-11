@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Challenge</title>
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      width: 100%;
+      height: 100vh;
+    }
+    .question-panel {
+      width: 30%;
+      padding: 20px;
+      overflow-y: auto;
+      border-right: 1px solid #ddd;
+    }
+    .editor-panel {
+      width: 70%;
+      padding: 0;
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left panel for the coding question -->
+    <div class="question-panel">
+      <h2>Question</h2>
+      <p><%= questionText %></p>
+      <h3>Instructions</h3>
+      <ul>
+        <% instructions.forEach(instruction => { %>
+          <li><%= instruction %></li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <!-- Right panel for embedding the live code editor -->
+    <div class="editor-panel">
+      <iframe src="<%= editorUrl %>" allowfullscreen></iframe>
+    </div>
+  </div>
+</body>
+</html>

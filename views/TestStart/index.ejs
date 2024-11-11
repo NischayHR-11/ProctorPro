@@ -7,6 +7,7 @@
         <br>
         <h5><%= test.questions[number-1].title%>?</h5>
         <br>
+        <input type="hidden" id="hiddenInput" name="selectedOption" value="">
         <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
             <p class="ms-3 mt-2">A)&nbsp;&nbsp;<%= test.questions[number-1].options[0]%></p>
         </div>
@@ -27,21 +28,31 @@
 
     <script>
         const optionDivs = document.querySelectorAll('.option');
+        const hiddenInput = document.getElementById('hiddenInput'); // Get the hidden input
     
         optionDivs.forEach(div => {
             div.addEventListener('click', function() {
-
+    
                 // Reset border and background for all options
                 optionDivs.forEach(d => {
-                    d.style.border = '1px solid rgb(128, 128, 128,.5)';
+                    d.style.border = '1px solid rgba(128, 128, 128, 0.5)'; // Fix color format
                     d.style.backgroundColor = 'transparent';  // Reset background
                 });
     
-                // Set border color to lightblue and add shaded sky blue background for the clicked option
+                // Set border color to light blue and shaded sky blue background for clicked option
                 this.style.border = '2px solid lightblue';
                 this.style.backgroundColor = 'rgba(135, 206, 250, 0.2)'; // Sky blue with transparency
+    
+                // Get the name and value from the clicked div's dataset
+                const name = this.dataset.name;
+                const value = this.dataset.value;
+    
+                // Set the hidden input's name and value
+                hiddenInput.name = name;  // Update the input name (optional)
+                hiddenInput.value = value; // Update the input value
             });
         });
     </script>
+    
     
 </body>
