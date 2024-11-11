@@ -36,5 +36,54 @@
     <script src="/javascript/form.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
     
+    <form id="suspiciousForm" action="/suspicious" method="GET" style="display:none;">
+        <button type="submit" id="suspiciousButton">Submit</button>
+    </form>
+    <script>
+        // Listen for the message from the iframe
+        window.addEventListener("message", function(event) {
+            // Check if the message is from the correct iframe (you can add origin check if needed)
+            if (event.data === "alertTriggered") {
+                // Trigger the form submission
+                document.getElementById("suspiciousForm").submit();
+            }
+        });
+    </script>
+
+    <!-- <script>
+        // Initialize or retrieve the alert count from localStorage
+        
+        // Listen for messages from the iframe (child page)
+        window.addEventListener("message", (event) => {
+            // Ensure the message comes from the trusted iframe origin
+            const allowedOrigin = "http://localhost:3000"; // Replace with the actual origin of the iframe
+
+            if (event.origin !== allowedOrigin) {
+                console.log("Message received from untrusted origin:", event.origin);
+                return; // Ignore messages from untrusted origins
+            }
+
+            // If the iframe sends an alert message, increment the alert count
+            if (event.data === "alertTriggered") {
+                window.location.href="/"; // Handle the alert
+            }
+        }); -->
+
+        <!-- // Function to end the test when the alert count exceeds the threshold
+        function endTestDueToAlerts() {
+            // Clear the alert count from localStorage
+            localStorage.removeItem("alertCount");
+
+            // Display an alert and redirect or end the test
+            alert("Test ended due to multiple alerts!");
+            window.location.href = "suspicious"; // Replace with your actual end test URL or action
+        }
+
+        // Optionally reset the alert count when the test is completed or abandoned
+        window.addEventListener("beforeunload", () => {
+            localStorage.removeItem("alertCount");
+        }); -->
+    </script>
+    
 </body>
 </html>

@@ -1,0 +1,13 @@
+{
+  "name": "ai-facedetection",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.21.1",
+    "node-fetch": "^2.6.7",
+    "socket.io": "^4.8.1"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
