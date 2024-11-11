@@ -194,6 +194,7 @@ app.post("/startTest/:id",async(req,res)=>{
 
      console.log(req.body)
      let number = parseInt(req.body.number, 10);
+     console.log(number);
 
      // If number is NaN (undefined or invalid), start from 1
      if (isNaN(number)) {
