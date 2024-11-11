@@ -290,6 +290,11 @@ app.get("/logout",(req,res,next)=>{
 app.get("/endtest",(req,res)=>{
 
     res.render("./TestStart/endtest.ejs")
+});
+
+app.get("/suspicious",(res,req)=>{
+
+    res.render("./TestStart/suspicious.ejs");
 })
 
 app.all("*",(req,res,next)=>{
