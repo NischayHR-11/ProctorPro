@@ -292,7 +292,7 @@ app.get("/endtest",(req,res)=>{
     res.render("./TestStart/endtest.ejs")
 });
 
-app.get("/suspicious",(res,req)=>{
+app.get("/suspicious",(req,res)=>{
 
     res.render("./TestStart/suspicious.ejs");
 })
