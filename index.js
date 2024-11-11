@@ -308,8 +308,3 @@ app.use((err,req,res,next)=>{                                   // Error Handlin
     res.status(status).send(message);
 });
 
-app.get("/suspicious", (req, res) => {
-    // This is a placeholder response. You can render a view or send a JSON response as per your requirements.
-    res.render(".TestStart/suspicious.ejs", { message: "Suspicious activity detected!" });  // Renders a view with a message
-});
-
