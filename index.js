@@ -156,13 +156,13 @@ app.get("/:id/generateLink",(req,res)=>{
 app.get("/instructions",isloggedin,(req,res)=>{
 
     res.render("./TestStart/instructions.ejs")
-})
+});
 
 app.get("/testcamera/:id",(req,res)=>{
     
     let{id}=req.params;
     res.render("./TestStart/testcamera.ejs",{id})
-})
+});
 
 app.get("/startTest",isloggedin,(req,res)=>{
 
@@ -285,6 +285,11 @@ app.get("/logout",(req,res,next)=>{
         }
 
     })
+});
+
+app.get("/endtest",(req,res)=>{
+
+    res.render("./TestStart/endtest.ejs")
 })
 
 app.all("*",(req,res,next)=>{
