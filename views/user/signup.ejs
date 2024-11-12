@@ -4,7 +4,7 @@
 
     <div class="row">
 
-        <form action="/signup" method="post"  class=" col-5 needs-validation offset-3" style="margin-top: .5rem;margin-bottom: 1rem;">
+        <form action="/signup" method="post" novalidate class=" col-5 needs-validation offset-3" style="margin-top: .5rem;margin-bottom: 1rem;">
 
 
             <h2>OnlineTest</h2>
@@ -14,16 +14,19 @@
                 <label for="username" class="form-label mb-2">Username</label>
                 <input type="text" placeholder="" name="username" class="form-control" required>
                 <div class="valid-feedback"> Looks good! </div>
+                <div class="invalid-feedback"> Enter User Name! </div>
             </div>
         
             <div class="mb-3">
                 <label for="email" class="form-label mb-2">Email</label>
                 <input type="text" placeholder="@gmail.com" name="email" class="form-control" required>
+                <div class="invalid-feedback"> Enter The Email! </div>
             </div>
         
             <div class="mb-5">
                 <label for="password" class="form-label mb-2">password</label>
                 <input type="password" placeholder="Enter password" name="password" class="form-control" required>
+                <div class="invalid-feedback"> Set The Password! </div>
             </div>
         
             <button class="btn btn-success" class="mb-5">Register</button>
