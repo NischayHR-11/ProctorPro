@@ -10,11 +10,13 @@
             <label for="title" class="form-label">Test Name</label>
             <input type="text" placeholder="Enter the Test name !!" name="testname" class="form-control" required>
             <div class="valid-feedback"> Name Looks good! </div>
+            <div class="invalid-feedback"> Enter Test Name! </div>
         </div>
 
         <div class="mb-3">
             <label for="title" class="form-label">Test Duration</label>
-            <input type="text" placeholder="Enter Test Duration In Minutes !" name="time" class="form-control" required>
+            <input type="number" placeholder="Enter Test Duration In Minutes !" name="time" class="form-control" required>
+            <div class="invalid-feedback"> Enter Test Duration! </div>
         </div>
 
         <div class="mb-3">
