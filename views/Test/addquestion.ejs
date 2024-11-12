@@ -7,7 +7,7 @@
         <h2>Prepare Questions </h2>
         <br>
 
-        <form method="post" class=" mt-3 col-6" action="/<%=id %>/addquestions" novalidate class="needs-validation" style="background-color: #EBEBEB;border-radius: 1rem;padding: 1.5rem;">
+        <form method="post" class=" mt-3 col-6 needs-validation" action="/<%=id %>/addquestions" novalidate style="background-color: #EBEBEB;border-radius: 1rem;padding: 1.5rem;">
 
             <h5 class="mb-5 ms-3">Question</h5>
         
@@ -15,43 +15,44 @@
                 <label for="title" class="form-label">Question Title</label>
                 <input type="text" placeholder=" Enter The Question ?" name="title" class="form-control" required>
                 <div class="valid-feedback"> Question Looks good! </div>
+                <div class="invalid-feedback"> Enter The Question! </div>
             </div>
         
             <div class="mb-3 col-8">
                 <label for="description" class="form-label">Description</label> <!-- Changed name attribute to "description" -->
-                <input type="text" placeholder="Type Something.." name="description" class="form-control" required>
+                <input type="text" placeholder="Type Something.." name="description" class="form-control">
                 <div class="valid-feedback"> Description Looks good! </div>
             </div>
         
             <h5 class="mb-4 ms-3 mt-5">Answer</h5>
         
-            <div class="mb-3 col-6" style="display: flex;align-items: center;justify-content: center;">
+            <div class="mb-3 col-8" style="display: flex;align-items: center;justify-content: center;">
                 <input type="text" placeholder="choice 1" name="choice1" class="form-control" required> <!-- Changed name attributes -->
-                <div class="valid-feedback"> Choice 1 Looks good! </div>
-                <i class="fa-solid fa-trash ms-3"></i>
+                <div class="valid-feedback ms-3"> Choice 1 Looks good! </div>
+                <div class="invalid-feedback ms-3"> Enter choice 1! </div>
             </div>
-            <div class="mb-3 col-6" style="display: flex;align-items: center;justify-content: center;">
+            <div class="mb-3 col-8" style="display: flex;align-items: center;justify-content: center;">
                 <input type="text" placeholder="choice 2" name="choice2" class="form-control" required> <!-- Changed name attributes -->
-                <i class="fa-solid fa-trash ms-3"></i>
-                <div class="valid-feedback"> Choice 2 Looks good! </div>
+                <div class="valid-feedback ms-3"> Choice 2 Looks good! </div>
+                <div class="invalid-feedback ms-3"> Enter choice 2! </div>
             </div>
         
-            <div class="mb-3 col-6" style="display: flex;align-items: center;justify-content: center;">
+            <div class="mb-3 col-8" style="display: flex;align-items: center;justify-content: center;">
                 <input type="text" placeholder="choice 3" name="choice3" class="form-control" required> <!-- Changed name attributes -->
-                <i class="fa-solid fa-trash ms-3"></i>
-                <div class="valid-feedback"> Choice 3 Looks good! </div>
+                <div class="valid-feedback ms-3"> Choice 3 Looks good! </div>
+                <div class="invalid-feedback ms-3"> Enter choice 3! </div>
             </div>
         
-            <div class="mb-3 col-6" style="display: flex;align-items: center;justify-content: center;">
+            <div class="mb-3 col-8" style="display: flex;align-items: center;justify-content: center;">
                 <input type="text" placeholder="choice 4" name="choice4" class="form-control" required> <!-- Changed name attributes -->
-                <i class="fa-solid fa-trash ms-3"></i>
-                <div class="valid-feedback"> Choice 4 Looks good! </div>
+                <div class="valid-feedback ms-3"> Choice 4 Looks good! </div>
+                <div class="invalid-feedback ms-3"> Enter choice 4! </div>
             </div>
         
             <div class="mb-3 mt-5" style="display: flex;align-items: center;justify-content: center;">
                 <p class="me-2">Enter The Correct choice For Question &nbsp;&nbsp;: </p>
                 <div class="col-1 mb-3">
-                    <input type="text" name="answer" class="form-control" style="height: 1.8rem;" required> <!-- Changed name attributes -->
+                    <input type="text" name="answer" class="form-control" style="height: 1.6rem;" required> <!-- Changed name attributes -->
                 </div>
                 
             </div>
