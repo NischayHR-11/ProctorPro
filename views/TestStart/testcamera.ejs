@@ -1,31 +1,45 @@
+
+
+<!-- views/face_detection.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera Access</title>
-    <style>
-        .container{
-            display: flex;
-            justify-self: center;
-            align-items: center;
-            height: 100vh;
-            width: 60%;
-        }
-        iframe{
-            border: none;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <title>Face Detection Stream</title>
 </head>
 <body>
-    <div class="container">
-        <iframe src="http://localhost:3000/"></iframe>
+    <h2 style="text-align:center;">Live Face Detection</h2>
+    <div id="video-container" style="text-align:center;">
+        <!-- Video Stream -->
+        <img src="http://localhost:5000/video" alt="Video Stream" width="640" height="480">
     </div>
-    
+
     <form action="/startTest/<%=id%>" method="post"> <button class="btn btn-dark">submit</button></form>
+
+    <script>
+        let alertcount = 0;
+        // Function to check the alert status every 2 seconds
+        function checkAlertStatus() {
+            fetch('http://localhost:5000/alert-status')
+                .then(response => response.json())
+                .then(data => {
+                    // Trigger alert when multiple faces are detected
+                    if (data.alert_message) {
+                        alert(data.alert_message);
+                        alertcount++;
+
+                        if (alertcount > 3) {
+                            window.parent.postMessage("alertTriggered", "*");
+                        }
+                    }
+                })
+                .catch(error => console.error('Error fetching alert status:', error));
+        }
+
+        // Call the checkAlertStatus function every 2 seconds
+        setInterval(checkAlertStatus, 2000);
+    </script>
 </body>
 </html>
