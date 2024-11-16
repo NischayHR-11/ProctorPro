@@ -18,17 +18,10 @@
     <%- include("../includes/navbarStartTest.ejs") %>
     <div class="container" style="display: flex;">
         <%- body %> 
-        <div  style="height: 40vh;width:30%;background-color: #f2f2f2;">
-            <iframe src="http://localhost:3000/" style="
-                transform: scale(1);
-                transform-origin: 0 0;
-                height: 100%;
-                width: 100%;
-                border: none;
-                margin: 0;
-                padding: 0;
-                zoom: 0.55;
-                "></iframe>
+
+        <div id="video-container" style="text-align:center;height: 40vh;width:40%;background-color: #f2f2f2;padding: 10px;padding-bottom: 1rem;">
+            <!-- Video Stream -->
+            <img src="http://localhost:5000/video" alt="Video Stream" width="380" height="250">
         </div>
     </div>
     <%- include("../includes/footer.ejs") %>
@@ -40,6 +33,29 @@
         <button type="submit" id="suspiciousButton">Submit</button>
     </form>
     <script>
+        let alertcount = 0;
+        // Function to check the alert status every 2 seconds
+        function checkAlertStatus() {
+            fetch('http://localhost:5000/alert-status')
+                .then(response => response.json())
+                .then(data => {
+                    // Trigger alert when multiple faces are detected
+                    if (data.alert_message) {
+                        alert(data.alert_message);
+                        alertcount++;
+
+                        if (alertcount > 3) {
+                            window.parent.postMessage("alertTriggered", "*");
+                        }
+                    }
+                })
+                .catch(error => console.error('Error fetching alert status:', error));
+        }
+
+        // Call the checkAlertStatus function every 2 seconds
+        setInterval(checkAlertStatus, 2000);
+    </script>
+    <script>
         // Listen for the message from the iframe
         window.addEventListener("message", function(event) {
             // Check if the message is from the correct iframe (you can add origin check if needed)
@@ -49,40 +65,6 @@
             }
         });
     </script>
-
-    <!-- <script>
-        // Initialize or retrieve the alert count from localStorage
-        
-        // Listen for messages from the iframe (child page)
-        window.addEventListener("message", (event) => {
-            // Ensure the message comes from the trusted iframe origin
-            const allowedOrigin = "http://localhost:3000"; // Replace with the actual origin of the iframe
-
-            if (event.origin !== allowedOrigin) {
-                console.log("Message received from untrusted origin:", event.origin);
-                return; // Ignore messages from untrusted origins
-            }
-
-            // If the iframe sends an alert message, increment the alert count
-            if (event.data === "alertTriggered") {
-                window.location.href="/"; // Handle the alert
-            }
-        }); -->
-
-        <!-- // Function to end the test when the alert count exceeds the threshold
-        function endTestDueToAlerts() {
-            // Clear the alert count from localStorage
-            localStorage.removeItem("alertCount");
-
-            // Display an alert and redirect or end the test
-            alert("Test ended due to multiple alerts!");
-            window.location.href = "suspicious"; // Replace with your actual end test URL or action
-        }
-
-        // Optionally reset the alert count when the test is completed or abandoned
-        window.addEventListener("beforeunload", () => {
-            localStorage.removeItem("alertCount");
-        }); -->
     </script>
     
 </body>
