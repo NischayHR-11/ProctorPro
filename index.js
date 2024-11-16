@@ -65,20 +65,7 @@ app.use((req,res,next)=>{
     next();
 });
 
-const pythonProcess = spawn('python', ['face_detection.py']);
-
-pythonProcess.stdout.on('data', (data) => {
-    console.log(`Python: ${data}`);
-});
-
-pythonProcess.stderr.on('data', (data) => {
-    console.error(`Python error: ${data}`);
-});
-
-// // Define route to render the face detection page
-// app.get('/face-detection', (req, res) => {
-//     res.render('face_detection');  // Render the face_detection.ejs template
-// });
+let pythonProcess = null;
 
 app.listen(port,(req,res)=>{
 
@@ -174,10 +161,30 @@ app.get("/instructions",isloggedin,(req,res)=>{
     res.render("./TestStart/instructions.ejs")
 });
 
-app.get("/testcamera/:id",(req,res)=>{
-    
-    let{id}=req.params;
-    res.render("./TestStart/testcamera.ejs",{id})
+// Route to start the Python server
+app.get("/testcamera/:id", (req, res) => {
+    const { id } = req.params;
+
+    if (!pythonProcess) { // Start the Python process only if not already running
+        pythonProcess = spawn('python', ['face_detection.py']);
+
+        pythonProcess.stdout.on('data', (data) => {
+            console.log(`Python: ${data}`);
+        });
+
+        pythonProcess.stderr.on('data', (data) => {
+            console.error(`Python error: ${data}`);
+        });
+
+        pythonProcess.on('close', (code) => {
+            console.log(`Python process exited with code ${code}`);
+            pythonProcess = null; // Reset the reference when the process ends
+        });
+    } else {
+        console.log("Python server is already running.");
+    }
+
+    res.render("./TestStart/testcamera.ejs", { id });
 });
 
 
@@ -306,9 +313,17 @@ app.get("/logout",(req,res,next)=>{
     })
 });
 
-app.get("/endtest",(req,res)=>{
+// Route to stop the Python server
+app.get("/endtest", (req, res) => {
+    if (pythonProcess) {
+        console.log('Terminating Python server...');
+        pythonProcess.kill('SIGINT'); // Gracefully terminate the Python process
+        pythonProcess = null; // Reset the reference after termination
+    } else {
+        console.log("No Python server is running.");
+    }
 
-    res.render("./TestStart/endtest.ejs")
+    res.render("./TestStart/endtest.ejs");
 });
 
 app.get("/suspicious",(req,res)=>{
