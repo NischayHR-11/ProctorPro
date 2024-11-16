@@ -13,6 +13,7 @@ const LocalStrategy=require("passport-local");                          // Start
 const testmodel=require("./models/Test");
 const user=require("./models/user");
 const isloggedin=require("./AuthenticationMiddleWare");
+const { spawn } = require('child_process');
 
 app.set("view engine","ejs");                                    // When The Response Is 'Rendered' default path to access.
 app.set("views",path.join(__dirname,"/views"));               
@@ -62,7 +63,22 @@ app.use((req,res,next)=>{
     res.locals.error=req.flash("error");                    // saves the error flash message to be printed, in browser storeage(treated like global variables).
     res.locals.curuser=req.user;                            // Storing Information of User For Automatic login after signUp. {locals == global variables}.
     next();
-})
+});
+
+const pythonProcess = spawn('python', ['face_detection.py']);
+
+pythonProcess.stdout.on('data', (data) => {
+    console.log(`Python: ${data}`);
+});
+
+pythonProcess.stderr.on('data', (data) => {
+    console.error(`Python error: ${data}`);
+});
+
+// // Define route to render the face detection page
+// app.get('/face-detection', (req, res) => {
+//     res.render('face_detection');  // Render the face_detection.ejs template
+// });
 
 app.listen(port,(req,res)=>{
 
@@ -163,6 +179,8 @@ app.get("/testcamera/:id",(req,res)=>{
     let{id}=req.params;
     res.render("./TestStart/testcamera.ejs",{id})
 });
+
+
 
 app.get("/startTest",isloggedin,(req,res)=>{
 
