@@ -46,11 +46,7 @@ Follow these quick steps to set up and run **ProctorPro** on your local machine:
     npm install
     ```
 
-4. **Run Flask API server**  
-    ```bash
-    node server.js
-    ```
-5. **Run the Application**  
+4. **Run the Application**  
     ```bash
     node index.js
     ```
