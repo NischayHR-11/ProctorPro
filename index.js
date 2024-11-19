@@ -1,3 +1,4 @@
+require("dotenv").config();  
 const express =require("express");
 const app = express();
 const port=8080;
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use(method('_method'));
 app.engine("ejs",ejsmate); 
 
+const db= process.env.MONGO_URI;
 
 main().then(()=>{                                                        // Since To Connect mongoDb To Backend (Server) is Asyncronous Process.                        
     console.log("DATA BASE CONNECTED SUCCESSFULLY..");               
@@ -312,6 +314,12 @@ app.get("/logout",(req,res,next)=>{
 
     })
 });
+
+
+app.get("/scorecard",(req,res)=>{
+
+    res.render("./TestStart/score.ejs");
+})
 
 // Route to stop the Python server
 app.get("/endtest", (req, res) => {
