@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #3babfb;
+        }
+
+        .container {
+            display: flex;
+            width: 800px;
+            height: 400px;
+            padding: 30px;
+            border-radius: 8px;
+            background: #f2f2f2;
+            column-gap: 30px;
+            align-items: center;
+        }
+
+        .info {
+            width: 35%;
+        }
+
+        .info h2, .info p {
+            margin-bottom: 10px;
+            color: #111111;
+        }
+
+        .circular-bars {
+            display: flex;
+            width: 65%;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .circular-progress {
+            position: relative;
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#7d2ae8 0deg, #ededed 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circular-progress::before {
+            content: "";
+            position: absolute;
+            height: 130px;
+            width: 130px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+
+        .progress-value {
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            color: #5ebd84;
+        }
+
+        .time {
+            text-align: center;
+            margin-top: 20px;
+            color: #606060;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="info">
+            <h2>User Name</h2>
+            <p>Email: user@example.com</p>
+            <p>Time Taken: 10 minutes</p>
+        </div>
+        <div class="circular-bars">
+            <div class="circular-progress">
+                <span class="progress-value" id="score1">0%</span>
+            </div>
+            <div class="circular-progress">
+                <span class="progress-value" id="score2">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function animateCircularProgress(elementId, score, animationSpeed) {
+            let circularProgress = document.getElementById(elementId).parentElement,
+                progressValue = document.getElementById(elementId);
+
+            let progressStartValue = 0;
+
+            if (window[elementId + 'Interval']) clearInterval(window[elementId + 'Interval']);
+
+            window[elementId + 'Interval'] = setInterval(() => {
+                progressStartValue++;
+
+                progressValue.textContent = `${progressStartValue}%`;
+                circularProgress.style.background = `conic-gradient(#5ebd84 ${progressStartValue * 3.6}deg, #ededed 0deg)`;
+
+                if (progressStartValue === score) {
+                    clearInterval(window[elementId + 'Interval']);
+                }
+            }, animationSpeed);
+        }
+
+        animateCircularProgress('score1', 75, 20);
+        animateCircularProgress('score2', 90, 15);
+    </script>
+</body>
+</html>
