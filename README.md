@@ -51,7 +51,7 @@ Follow these quick steps to set up and run **ProctorPro** on your local machine:
     node index.js
     ```
   
-5. **Open your browser** and go to `http://localhost:3000` to explore the platform.
+5. **Open your browser** and go to `http://localhost:8080` to explore the platform.
 
 ---
 
