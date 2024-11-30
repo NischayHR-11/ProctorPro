@@ -35,7 +35,7 @@ main().then(()=>{                                                        // Sinc
 
 async function main() {                                               // To Connect mongoDb To Backend (Server).
     
-    await mongoose.connect("mongodb+srv://nischayhr11:Nischay1@cluster0.6p9g1.mongodb.net/Proctorpro?retryWrites=true&w=majority&appName=Cluster0");                                      // MongoDB URL.
+    await mongoose.connect(db);                                      // MongoDB URL.
 }
 
 const sessionoptions = {
@@ -107,12 +107,13 @@ app.get("/:id/addquestions",async(req,res)=>{
 app.post("/:id/addquestions",async(req,res)=>{
 
     let{id}=req.params;
-    let{title,choice1,choice2,choice3,choice4,answer}=req.body;
+    let{title,choice1,choice2,choice3,choice4,answer,level}=req.body;
     const test = await testmodel.findById(id);
     const questions=test.questions;
     const q={
         title:title,
         options:[choice1,choice2,choice3,choice4],
+        level:level,
         answer:answer
     }
     questions.push(q);
@@ -219,8 +220,11 @@ app.post("/startTest/:id",async(req,res)=>{
      let{id}=req.params;
      const test = await testmodel.findById(id);
 
-     console.log(req.body)
+     const {selectedOption}= req.body;
+     console.log(res.locals.curuser);
+     const selectedOptionIndex = parseInt(selectedOption, 10);
      let number = parseInt(req.body.number, 10);
+
      console.log(number);
 
      // If number is NaN (undefined or invalid), start from 1
