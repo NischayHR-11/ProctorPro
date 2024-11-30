@@ -24,6 +24,10 @@ const TestSchema = new mongoose.Schema({
                 type: String,
                 required: true,
             },
+            level:{
+                type:String,
+                default:"Easy",
+            },
             options: [
                 {
                     type: String,
