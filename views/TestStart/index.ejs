@@ -1,58 +1,59 @@
 <% layout("/layouts/boilerplatestartTest") %>
 
 <body>
-    <form method="post" action="/startTest/<%= test._id%>" novalidate class="needs-validation col-6 offset-2 me-5"style="background-color: rgb(235, 235, 235,.4);border-radius: 1rem;padding: 1.5rem;">
-        <h4>Online Test</h4>
-        <p class="mt-5">Question &nbsp;&nbsp;<%= number %> &nbsp;Of &nbsp;<%= test.questions.length %></p>
-        <br>
-        <h5><%= test.questions[number-1].title%>?</h5>
-        <br>
-        <input type="hidden" id="hiddenInput" name="selectedOption" value="">
-        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
-            <p class="ms-3 mt-2">A)&nbsp;&nbsp;<%= test.questions[number-1].options[0]%></p>
-        </div>
-        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
-            <p class="ms-3 mt-2">B)&nbsp;&nbsp; <%= test.questions[number-1].options[1]%></p>
-        </div>
-        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
-            <p class="ms-3 mt-2">C)&nbsp;&nbsp; <%= test.questions[number-1].options[2]%></p>
-        </div>
-        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
-            <p class="ms-3 mt-2">D)&nbsp;&nbsp; <%= test.questions[number-1].options[3]%></p>
-        </div>
+    <form
+    method="post"
+    action="/startTest/<%= test._id %>"
+    novalidate
+    class="needs-validation col-6 offset-2 me-5"
+    style="background-color: rgb(235, 235, 235, 0.4); border-radius: 1rem; padding: 1.5rem;"
+>
+    <h4>Online Test</h4>
+    <p class="mt-5" style="margin-right: 1rem;">Question <%= number %> of <%= test.questions.length %></p>
+    <p>Level : <%= test.questions[number-1].level%></p>
+    <br />
+    <h5><%= test.questions[number - 1].title %>?</h5>
+    <br />
+    <input type="hidden" id="hiddenInput" name="selectedOption" value="" />
+    <!-- Hidden input for selected option -->
 
-        <br>
-        <button class="btn btn-outline-primary" type="submit" name="number" value="<%= number %>">Next</button>
-        <br>
-    </form>
+    <% test.questions[number - 1].options.forEach((option, index) => { %>
+    <div
+        class="mb-3 option"
+        data-value="<%= index + 1 %>"
+        style="border: 1px solid rgb(128, 128, 128, 0.5); border-radius: 0.5rem; width: 80%;"
+    >
+        <p class="ms-3 mt-2"><%= String.fromCharCode(65 + index) %>) <%= option %></p>
+    </div>
+    <% }) %>
 
-    <script>
-        const optionDivs = document.querySelectorAll('.option');
-        const hiddenInput = document.getElementById('hiddenInput'); // Get the hidden input
-    
-        optionDivs.forEach(div => {
-            div.addEventListener('click', function() {
-    
-                // Reset border and background for all options
-                optionDivs.forEach(d => {
-                    d.style.border = '1px solid rgba(128, 128, 128, 0.5)'; // Fix color format
-                    d.style.backgroundColor = 'transparent';  // Reset background
-                });
-    
-                // Set border color to light blue and shaded sky blue background for clicked option
-                this.style.border = '2px solid lightblue';
-                this.style.backgroundColor = 'rgba(135, 206, 250, 0.2)'; // Sky blue with transparency
-    
-                // Get the name and value from the clicked div's dataset
-                const name = this.dataset.name;
-                const value = this.dataset.value;
-    
-                // Set the hidden input's name and value
-                hiddenInput.name = name;  // Update the input name (optional)
-                hiddenInput.value = value; // Update the input value
+    <br />
+    <button class="btn btn-outline-primary" type="submit" name="number" value="<%= number %>">
+        Next
+    </button>
+    <br />
+</form>
+
+<script>
+    const optionDivs = document.querySelectorAll(".option"); // Select all option divs
+    const hiddenInput = document.getElementById("hiddenInput"); // Get the hidden input
+
+    optionDivs.forEach((div) => {
+        div.addEventListener("click", function () {
+            // Reset styles for all options
+            optionDivs.forEach((d) => {
+                d.style.border = "1px solid rgba(128, 128, 128, 0.5)";
+                d.style.backgroundColor = "transparent";
             });
+
+            // Highlight the selected option
+            this.style.border = "2px solid lightblue";
+            this.style.backgroundColor = "rgba(135, 206, 250, 0.2)";
+
+            // Update hidden input value
+            hiddenInput.value = this.dataset.value; // Set hidden input value
         });
-    </script>
-    
-    
+    });
+</script>
+
 </body>
