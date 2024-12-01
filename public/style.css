@@ -148,7 +148,7 @@ body{
     color: black;
 }
 
-@media (min-width: 300px) and (max-width: 500px) {
+@media (min-width: 300px) and (max-width: 650px) {
 
     .choice{
         flex-direction: column;
@@ -179,4 +179,19 @@ body{
         word-break: break-word;
     }
 
+    .containertest{
+
+        flex-direction: column;
+        margin-left: 1rem;
+    }
+
+    #video-container{
+        width: 90% !important;
+        margin-top: .5rem;
+    }
+
+    .video{
+
+        width: 320px !important;
+    }
 }
