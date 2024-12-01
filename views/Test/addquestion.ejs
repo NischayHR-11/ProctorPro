@@ -2,12 +2,12 @@
 
 <body>
 
-    <div class="row offset-2">
+    <div class="row offset-md-2 add">
 
         <h2>Prepare Questions </h2>
         <br>
 
-        <form method="post" class=" mt-3 col-6 needs-validation" action="/<%=id %>/addquestions" novalidate style="background-color: #EBEBEB;border-radius: 1rem;padding: 1.5rem;">
+        <form method="post" class=" mt-3 col-md-6 needs-validation" action="/<%=id %>/addquestions" novalidate style="background-color: #EBEBEB;border-radius: 1rem;padding: 1.5rem;">
 
             <h5 class="mb-5 ms-3">Question</h5>
         
@@ -61,7 +61,7 @@
             <div class="mb-3 mt-5" style="display: flex;align-items: center;justify-content: center;">
                 <p class="me-2">Enter The Correct choice For Question &nbsp;&nbsp;: </p>
                 <div class="col-1 mb-3">
-                    <input type="text" name="answer" class="form-control" style="height: 1.6rem;" required> <!-- Changed name attributes -->
+                    <input type="text" name="answer" class="form-control inp" style="height: 1.6rem;" required> <!-- Changed name attributes -->
                 </div>
                 
             </div>
@@ -77,7 +77,7 @@
         </form>
         
 
-        <div class="col-4 ms-5 " novalidate class="needs-validation" style="background-color: transparent;border-radius: 1rem;padding: 1.5rem;">
+        <div class="col-md-4 ms-md-5 " novalidate class="needs-validation" style="background-color: transparent;border-radius: 1rem;padding: 1.5rem;">
 
             <% questions.forEach((question, index) => { %>  
                 <div style="background-color: antiquewhite;height: 6rem;border-radius: 1rem;display: flex;align-items: center;justify-content: center;margin-bottom: 1rem;">
@@ -99,7 +99,7 @@
     </div>
 
     <hr>
-    <form action="/<%=id %>/description"><button class="btn btn-danger" style="margin-left: 70rem;">Continue</button></form>
+    <form action="/<%=id %>/description"><button class="btn btn-danger addbtn" style="margin-left: 70rem;">Continue</button></form>
    
 
 </body>
