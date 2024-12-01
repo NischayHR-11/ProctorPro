@@ -147,3 +147,36 @@ body{
     text-decoration: none;
     color: black;
 }
+
+@media (min-width: 300px) and (max-width: 500px) {
+
+    .choice{
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: 80%;
+        margin-bottom: 3rem;
+    }
+    .subchoice{
+        padding: .5rem;
+    }
+
+    .inp{
+    
+        height: auto !important;
+      width: 40px !important;
+    }
+
+    .addbtn{
+
+        margin-left: 1rem !important;
+    }
+
+    #startTestForm {
+        text-align: center;
+        height: auto !important;
+        width: 90% !important;
+        padding: 1rem !important;
+        word-break: break-word;
+    }
+
+}
