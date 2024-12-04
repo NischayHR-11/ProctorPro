@@ -4,6 +4,8 @@
         <form id="startTestForm" action="/startTest/<%=id %>/instructions" method="GET" class="col-md-6" 
               style="background-color: #f2f2f2; height: auto; width: 80%; display: flex; align-items: center; justify-content: center; 
                      border-radius: 1rem; padding: 1rem; overflow-wrap: break-word;">
+                    
+                <!-- for localhost remove renderlink in anchor tag -->
           <p style="text-align: center; word-break: break-word;">
             Test Link: &nbsp;&nbsp;&nbsp;&nbsp; 
             <a href="https://proctorpro-c9ba.onrender.com/startTest/<%=id %>/instructions" id="startTestLink" 
@@ -13,6 +15,8 @@
           </p> 
         </form>
     </div>
+
+
     
     <script>
         document.getElementById("startTestLink").addEventListener("click", function() {
