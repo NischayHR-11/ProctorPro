@@ -1,23 +1,27 @@
 <% layout("/layouts/boilerplatestartTest") %>
 
 <body>
-    <form method="get" action="/scorecard" novalidate class="needs-validation col-md-6 offset-md-2 me-5" style="background-color: rgb(235, 235, 235,.4);border-radius: 1rem;padding: 1.5rem;">
+    <form method="post" action="/scorecard/<%= id  %>" novalidate class="needs-validation col-md-6 offset-md-2 me-5" style="background-color: rgb(235, 235, 235,.4);border-radius: 1rem;padding: 1.5rem;">
         <h4>ProctorPro</h4>
         <p class="mt-5">Question &nbsp;&nbsp;<%= number %> &nbsp;Of &nbsp;<%= test.questions.length %></p>
         <p>Level : <%= test.questions[number-1].level%></p>
         <br>
         <h5><%= test.questions[number-1].title%>?</h5>
         <br>
-        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
+        
+        <input type="hidden" id="hiddenInput" name="selectedOption" value="" /> <!-- Hidden input -->
+
+        <!-- Adding data-value to each option div -->
+        <div class="mb-3 option" data-value="1" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
             <p class="ms-3 mt-2">A)&nbsp;&nbsp; <%= test.questions[number-1].options[0]%></p>
         </div>
-        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
+        <div class="mb-3 option" data-value="2" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
             <p class="ms-3 mt-2">B)&nbsp;&nbsp; <%= test.questions[number-1].options[1]%></p>
         </div>
-        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
+        <div class="mb-3 option" data-value="3" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
             <p class="ms-3 mt-2">C)&nbsp;&nbsp; <%= test.questions[number-1].options[2]%></p>
         </div>
-        <div class="mb-3 option" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
+        <div class="mb-3 option" data-value="4" style="border: 1px solid rgb(128, 128, 128,.5);border-radius: .5rem;width:80%">
             <p class="ms-3 mt-2">D)&nbsp;&nbsp;<%= test.questions[number-1].options[3]%></p>
         </div>
 
@@ -27,47 +31,24 @@
     </form>
 
     <script>
-
         const optionDivs = document.querySelectorAll(".option"); // Select all option divs
-            const hiddenInput = document.getElementById("hiddenInput"); // Get the hidden input
+        const hiddenInput = document.getElementById("hiddenInput"); // Get the hidden input
 
-            optionDivs.forEach((div) => {
-                div.addEventListener("click", function () {
-                    // Reset styles for all options
-                    optionDivs.forEach((d) => {
-                        d.style.border = "1px solid rgba(128, 128, 128, 0.5)";
-                        d.style.backgroundColor = "transparent";
-                    });
-
-                    // Highlight the selected option
-                    this.style.border = "2px solid lightblue";
-                    this.style.backgroundColor = "rgba(135, 206, 250, 0.2)";
-
-                    // Update hidden input value
-                    hiddenInput.value = this.dataset.value; // Set hidden input value
+        optionDivs.forEach((div) => {
+            div.addEventListener("click", function () {
+                // Reset styles for all options
+                optionDivs.forEach((d) => {
+                    d.style.border = "1px solid rgba(128, 128, 128, 0.5)";
+                    d.style.backgroundColor = "transparent";
                 });
+
+                // Highlight the selected option
+                this.style.border = "2px solid lightblue";
+                this.style.backgroundColor = "rgba(135, 206, 250, 0.2)";
+
+                // Update hidden input value
+                hiddenInput.value = this.dataset.value; // Set hidden input value
             });
-            
-        // Function to access the user's webcam and stream the video
-        function retrieveWebcamStream() {
-            const videoElement = document.getElementById('videoElement');
-            const webcamStreamActive = sessionStorage.getItem('webcamStreamActive');
-
-            // Check if the webcam stream is active from Page 1
-            if (webcamStreamActive === 'true') {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(function(stream) {
-                        videoElement.srcObject = stream;
-                    })
-                    .catch(function(error) {
-                        console.error('Error accessing webcam:', error);
-                    });
-            } else {
-                console.log("Webcam stream is not active.");
-            }
-        }
-
-        // Start the webcam when the page loads
-        window.onload = retrieveWebcamStream;
+        });
     </script>
 </body>

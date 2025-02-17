@@ -15,6 +15,7 @@ const testmodel=require("./models/Test");
 const user=require("./models/user");
 const isloggedin=require("./AuthenticationMiddleWare");
 const { spawn } = require('child_process');
+const { cursorTo } = require("readline");
 
 app.set("view engine","ejs");                                    // When The Response Is 'Rendered' default path to access.
 app.set("views",path.join(__dirname,"/views"));               
@@ -209,42 +210,96 @@ app.get("/startTest/:id",isloggedin,async(req,res)=>{
 app.get("/startTest/:id/instructions",isloggedin,async(req,res)=>{
 
     let{id}=req.params;
+
+    // Reset the score array for the logged-in user
+    await user.findByIdAndUpdate(req.user._id, { $set: { score: [] } });
+
+    console.log(req.user);
+
     const test = await testmodel.findById(id);
     const number=1;
     res.render("./TestStart/instructions.ejs",{number,id,test});
 });
 
-app.post("/startTest/:id",async(req,res)=>{
+app.post("/startTest/:id", isloggedin, async (req, res) => {
+    let { id } = req.params;
+    const test = await testmodel.findById(id);
+    const { selectedOption } = req.body;
+    const selectedOptionIndex = parseInt(selectedOption, 10);
+    let number = parseInt(req.body.number, 10);
 
-     // Parse the number from the form
-     let{id}=req.params;
-     const test = await testmodel.findById(id);
+    console.log("Current Question Number:", number);
+    console.log(selectedOptionIndex);
+    
+    // Ensure the number is valid; if not, default to 1
+    if (isNaN(number)) {
+        number = 1;
+    } else {
+        number += 1;
+    }
 
-     const {selectedOption}= req.body;
-     console.log(res.locals.curuser);
-     const selectedOptionIndex = parseInt(selectedOption, 10);
-     let number = parseInt(req.body.number, 10);
+    // Get the logged-in user
+    const currentUser = await user.findById(req.user._id);
 
-     console.log(number);
+    // Check if the selected answer is correct
+    if (test.questions[number - 2] && test.questions[number - 2].answer === selectedOptionIndex) {
+        console.log("Correct Answer! Adding 5 marks.");
+        
+        // Update user's score array by adding 5 marks
+        await user.findByIdAndUpdate(req.user._id, {
+            $push: { score: 5 }
+        });
+    }
 
-     // If number is NaN (undefined or invalid), start from 1
-     if (isNaN(number)) {
-         number = 1;  // Default to question 1 if there's an issue with the number
-     } else {
-         number += 1;  // Increment the number for the next question
-     }
-
-     if(number===test.questions.length){
-
-        res.render("TestStart/testend.ejs", { number ,test,id});
-
-     }else{
-
-        // Render the template with the new question number
-        res.render('TestStart/index.ejs', { number,id,test});
-     }
-
+    // If it's the last question, render the test end page
+    if (number === test.questions.length) {
+        res.render("TestStart/testend.ejs", { number, test, id });
+    } else {
+        res.render("TestStart/index.ejs", { number, id, test });
+    }
 });
+
+app.post("/scorecard/:id", isloggedin, async (req, res) => {   // lastquestion page.
+    let { id } = req.params;
+    const test = await testmodel.findById(id);
+    
+    const { selectedOption } = req.body;
+    const selectedOptionIndex = parseInt(selectedOption, 10);
+    let number = parseInt(req.body.number, 10) || 1;
+
+    console.log("Current Question Number:", number);
+    console.log("Selected Option Index:", selectedOptionIndex);
+    console.log("Full Request Body:", req.body);
+
+    // Ensure valid input for selectedOptionIndex and number
+    if (!isNaN(selectedOptionIndex) && !isNaN(number) && number > 0 && number <= test.questions.length) {
+        
+        // Check if the selected option is correct
+        if (test.questions[number - 1].answer === selectedOptionIndex) {
+            console.log("Correct Answer! Adding 5 marks.");
+
+            // Update the user's score by pushing 5 to the score array for each correct answer
+            await user.findByIdAndUpdate(req.user._id, {
+                $push: { score: 5 }  // Push 5 for correct answers
+            });
+        }
+    }
+
+    // Get the updated user info to display the score
+    let curuser = await user.findById(req.user._id);  // Fetch user again to get the updated score array
+    console.log("User Info:", curuser);
+
+    let score = curuser.score;  // Use curuser.score instead of req.user.score
+    const totalScore = score.reduce((acc, curr) => acc + curr, 0);
+    const maxScore = test.questions.length * 5;  // Max score is total questions * 5
+    const percentage = (totalScore / maxScore) * 100;
+
+    console.log(totalScore + "     " + percentage);
+
+    // Render the score page with the updated score
+    res.render("./TestStart/score.ejs", { curuser, totalScore, percentage });
+});
+
 
 app.get("/login",(req,res)=>{
 

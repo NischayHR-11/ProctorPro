@@ -154,7 +154,7 @@
             <div class="info">
                 <h2><%=curuser.username%></h2>
                 <p>Email: <%=curuser.email%></p>
-                <p>Time Taken: 10 minutes</p>
+                <p>Time Taken: 5 minutes</p>
             </div>
             <div class="circular-bars" style="flex-wrap: wrap;">
                 <div class="circular-progress">
@@ -171,28 +171,33 @@
     
 
     <script>
+        // Pass 'percentage' and 'totalScore' dynamically from your server to the template
+        let percentage = <%= percentage %>;
+        let totalScore = <%= totalScore %>;
+    
         function animateCircularProgress(elementId, score, animationSpeed) {
             let circularProgress = document.getElementById(elementId).parentElement,
                 progressValue = document.getElementById(elementId);
-
+    
             let progressStartValue = 0;
-
+    
             if (window[elementId + 'Interval']) clearInterval(window[elementId + 'Interval']);
-
+    
             window[elementId + 'Interval'] = setInterval(() => {
                 progressStartValue++;
-
+    
                 progressValue.textContent = `${progressStartValue}%`;
                 circularProgress.style.background = `conic-gradient(#5ebd84 ${progressStartValue * 3.6}deg, #ededed 0deg)`;
-
+    
                 if (progressStartValue === score) {
                     clearInterval(window[elementId + 'Interval']);
                 }
             }, animationSpeed);
         }
-
-        animateCircularProgress('score1', 75, 20);
-        animateCircularProgress('score2', 90, 15);
+    
+        // Now using the values passed from the server
+        animateCircularProgress('score1', percentage, 20);
+        animateCircularProgress('score2', percentage-5, 15);
     </script>
-</body>
+    </body>
 </html>
