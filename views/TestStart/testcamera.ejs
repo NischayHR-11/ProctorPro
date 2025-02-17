@@ -18,12 +18,18 @@
     </form>
 
     <script>
+        let userStream;
+
         // Function to access the user's webcam and stream the video
         function startWebcam() {
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(function(stream) {
                     const videoElement = document.getElementById('video');
                     videoElement.srcObject = stream;
+
+                    // Store the stream in sessionStorage to indicate that it's started
+                    userStream = stream;
+                    sessionStorage.setItem('webcamStreamActive', 'true');
                 })
                 .catch(function(error) {
                     console.error('Error accessing webcam:', error);
@@ -32,29 +38,6 @@
 
         // Start the webcam when the page loads
         window.onload = startWebcam;
-
-        let alertcount = 0;
-
-        // Function to check the alert status every 2 seconds
-        function checkAlertStatus() {
-            fetch('http://localhost:5000/alert-status')
-                .then(response => response.json())
-                .then(data => {
-                    // Trigger alert when multiple faces are detected
-                    if (data.alert_message) {
-                        alert(data.alert_message);
-                        alertcount++;
-
-                        if (alertcount > 3) {
-                            window.parent.postMessage("alertTriggered", "*");
-                        }
-                    }
-                })
-                .catch(error => console.error('Error fetching alert status:', error));
-        }
-
-        // Call the checkAlertStatus function every 2 seconds
-        setInterval(checkAlertStatus, 2000);
     </script>
 </body>
 </html>
