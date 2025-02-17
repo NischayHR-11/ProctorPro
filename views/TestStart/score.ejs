@@ -91,6 +91,60 @@
             margin-top: 20px;
             color: #606060;
         }
+        
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: 90vh;
+                padding-right: 5rem;
+                width: 80%; /* Ensure container width is full on mobile */
+                align-items: center;
+            }
+
+            .info {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .circular-bars {
+                width: 100%;
+                justify-content: center;
+                gap: 30px;
+                flex-direction: column; /* Stack vertically */
+                align-items: center;
+            }
+
+            .cnt{
+
+                margin-top: 2rem !important;
+
+            }
+
+            /* .circular-progress {
+                width: 150px;
+                height: 150px;
+                margin-bottom: 3rem; /* Added more space below the first circle */
+                margin-top: 2rem;
+            } */
+
+
+        }
+
+        @media (max-width: 576px) {
+            /* .circular-progress {
+                width: 130px;
+                height: 130px;
+                margin-bottom: 3rem; /* Added space below both circles */
+            } */
+
+            .progress-value {
+                font-size: 18px;
+            }
+        }
+
+        
     </style>
 </head>
 <body>
@@ -110,7 +164,7 @@
                     <span class="progress-value" id="score2">0%</span>
                 </div>
             </div>
-            <button class="btn btn-outline-danger" style="margin-top: 20rem;">Continue</button>
+            <button class="btn btn-outline-danger cnt" style="margin-top: 20rem;">Continue</button>
         </div>
 
     </form>
