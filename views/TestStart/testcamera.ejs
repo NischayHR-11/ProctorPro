@@ -1,7 +1,3 @@
-
-
-<!-- views/face_detection.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,15 +7,34 @@
 </head>
 <body>
     <h2 style="text-align:center;">Live Face Detection</h2>
+    
+    <!-- Video container to display webcam feed -->
     <div id="video-container" style="text-align:center;">
-        <!-- Video Stream -->
-        <img src="http://localhost:5000/video" alt="Video Stream" width="640" height="480">
+        <video id="video" width="640" height="480" autoplay></video>
     </div>
 
-    <form action="/startTest/<%=id%>" method="post"> <button class="btn btn-dark">submit</button></form>
+    <form action="/startTest/<%= id %>" method="post">
+        <button class="btn btn-dark">Submit</button>
+    </form>
 
     <script>
+        // Function to access the user's webcam and stream the video
+        function startWebcam() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    const videoElement = document.getElementById('video');
+                    videoElement.srcObject = stream;
+                })
+                .catch(function(error) {
+                    console.error('Error accessing webcam:', error);
+                });
+        }
+
+        // Start the webcam when the page loads
+        window.onload = startWebcam;
+
         let alertcount = 0;
+
         // Function to check the alert status every 2 seconds
         function checkAlertStatus() {
             fetch('http://localhost:5000/alert-status')
